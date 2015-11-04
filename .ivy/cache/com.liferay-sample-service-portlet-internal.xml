@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="com.liferay"
+		module="sample-service-portlet"
+		revision="working@JasondeMacBook-Pro.local"
+		conf="internal"
+		confs="default, internal, provided, runtime, test"
+		date="20151031124321"/>
+	<dependencies>
+	</dependencies>
+</ivy-report>
