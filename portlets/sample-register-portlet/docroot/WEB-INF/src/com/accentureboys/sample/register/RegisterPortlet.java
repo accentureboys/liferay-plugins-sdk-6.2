@@ -80,24 +80,6 @@ public class RegisterPortlet extends MVCPortlet {
 			return;
 		}
 		User defaultUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
-		//add contact information
-		long contactId = CounterLocalServiceUtil.increment(Contact.class.getName());
-		Contact contact = ContactLocalServiceUtil.createContact(contactId);
-		contact.setUserId(defaultUser.getUserId());
-		contact.setUserName(userName);
-		contact.setMale(gender == 1L ? true : false);
-		contact.setCreateDate(new Date());
-		ContactLocalServiceUtil.updateContact(contact);				
-		
-		//add phone information
-		long phoneId = CounterLocalServiceUtil.increment(Phone.class.getName());
-		Phone phone = PhoneLocalServiceUtil.createPhone(phoneId);
-		phone.setUserId(defaultUser.getUserId());
-		phone.setNumber(telphone);
-		phone.setCompanyId(company.getCompanyId());
-		phone.setCreateDate(new Date());
-		PhoneLocalServiceUtil.updatePhone(phone);
-		
 		//create user
 		boolean autoPassword = false;
 		boolean autoScreenName = false;
@@ -119,7 +101,28 @@ public class RegisterPortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(User.class.getName(), request);
 		
 		User user = UserLocalServiceUtil.addUserWithWorkflow(defaultUser.getUserId(), company.getCompanyId(), autoPassword, password1, password2, autoScreenName, userName, emailAddress, facebookId, "", LocaleUtil.fromLanguageId("zh_CN"), firstName, "", lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
-		
+		//add contact information
+		long contactId = CounterLocalServiceUtil.increment(Contact.class.getName());
+		Contact contact = ContactLocalServiceUtil.createContact(contactId);
+		contact.setUserId(user.getUserId());
+		contact.setCompanyId(company.getCompanyId());
+		contact.setUserName(userName);
+		contact.setMale(gender == 1L ? true : false);
+		contact.setFirstName(firstName);
+		contact.setLastName(lastName);
+		contact.setEmailAddress(emailAddress);
+		contact.setCreateDate(new Date());
+		ContactLocalServiceUtil.updateContact(contact);
+
+		// add phone information
+		long phoneId = CounterLocalServiceUtil.increment(Phone.class.getName());
+		Phone phone = PhoneLocalServiceUtil.createPhone(phoneId);
+		phone.setUserId(user.getUserId());
+		phone.setUserName(userName);
+		phone.setNumber(telphone);
+		phone.setCompanyId(company.getCompanyId());
+		phone.setCreateDate(new Date());
+		PhoneLocalServiceUtil.updatePhone(phone);
 		String redirect =
 				PortalUtil.getPathMain() + "/portal/login?login=" + user.getEmailAddress() +
 					"&password=" + password1 + "&rememberMe=1";		
