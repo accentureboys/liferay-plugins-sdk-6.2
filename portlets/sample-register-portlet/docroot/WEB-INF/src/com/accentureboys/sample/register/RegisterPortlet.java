@@ -94,6 +94,7 @@ public class RegisterPortlet extends MVCPortlet {
 		Phone phone = PhoneLocalServiceUtil.createPhone(phoneId);
 		phone.setUserId(defaultUser.getUserId());
 		phone.setNumber(telphone);
+		phone.setCompanyId(company.getCompanyId());
 		phone.setCreateDate(new Date());
 		PhoneLocalServiceUtil.updatePhone(phone);
 		
