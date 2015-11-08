@@ -38,6 +38,15 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class RegisterPortlet
  */
 public class RegisterPortlet extends MVCPortlet {
+	/**
+	 * Register user on register tab
+	 * 
+	 * @param request ActionRequest
+	 * @param response ActionResponse
+	 * @throws SystemException
+	 * @throws PortalException
+	 * @throws IOException
+	 */
 	public void registerUser(ActionRequest request, ActionResponse response) throws SystemException, PortalException, IOException{
 		//get values from the page
 		String userName = ParamUtil.getString(request, "userName");
