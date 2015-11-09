@@ -62,6 +62,8 @@ public class RegisterPortlet extends MVCPortlet {
 	public void serveResource(ResourceRequest request, ResourceResponse response)
 			throws IOException {
 		String newImgSrc = vcs.createCode();
+		String verifyCode = vcs.getCode();
+		request.setAttribute("verifyCode", verifyCode);
 		response.getWriter().append(newImgSrc);
 	}
 	/**
@@ -83,6 +85,7 @@ public class RegisterPortlet extends MVCPortlet {
 		String password2 = ParamUtil.getString(request, "repeat_pwd");
 		String emailAddress = ParamUtil.getString(request, "emailAddress");
 		String telphone = ParamUtil.getString(request, "telphone");
+		String verifyCode = ParamUtil.getString(request, "verifyCode");
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		Company company = themeDisplay.getCompany();

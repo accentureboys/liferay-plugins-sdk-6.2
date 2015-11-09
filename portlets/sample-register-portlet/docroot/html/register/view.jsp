@@ -88,6 +88,7 @@
 								<aui:validator name="required" />
 							</aui:input>
 						<img src="${imgSrc}" class="refreshCode" onclick="refreshCode();">
+						<aui:input type="hidden" name="hiddenVerValue" value="${verifyCode }"></aui:input>
 						<aui:script>
 							var getCaptchaUrl = '${getCaptcha}';
 						</aui:script>
