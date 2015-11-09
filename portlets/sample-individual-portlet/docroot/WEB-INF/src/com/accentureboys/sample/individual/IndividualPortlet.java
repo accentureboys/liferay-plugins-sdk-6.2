@@ -20,8 +20,8 @@ import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -46,12 +46,12 @@ public class IndividualPortlet extends MVCPortlet {
 		//get current login user
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		Company company = themeDisplay.getCompany();
-		User defaultUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
+		User user = PortalUtil.getUser(request);
 		//add user's address information
 		long addressId = CounterLocalServiceUtil.increment(Address.class.getName());
 		Address address = AddressLocalServiceUtil.createAddress(addressId);
-		address.setUserId(defaultUser.getUserId());
-		address.setUserName(defaultUser.getScreenName());
+		address.setUserId(user.getUserId());
+		address.setUserName(user.getScreenName());
 		address.setCompanyId(company.getCompanyId());
 		address.setCountryId(countryId);
 		address.setRegionId(regionId);
@@ -62,18 +62,18 @@ public class IndividualPortlet extends MVCPortlet {
 		long accountId = CounterLocalServiceUtil.increment(Account.class.getName());
 		Account account = AccountLocalServiceUtil.createAccount(accountId);
 		account.setCompanyId(company.getCompanyId());
-		account.setUserId(defaultUser.getUserId());
-		account.setUserName(defaultUser.getScreenName());
+		account.setUserId(user.getUserId());
+		account.setUserName(user.getScreenName());
 		account.setName(idType);
 		account.setLegalName(idType);
 		account.setLegalId(idNumber);
 		account.setCreateDate(new Date());
 		AccountLocalServiceUtil.updateAccount(account);
 		//update user's contact information, add accountId to contact object
-		Contact contact = defaultUser.getContact();
+		Contact contact = user.getContact();
 		contact.setAccountId(accountId);
 		ContactLocalServiceUtil.updateContact(contact);
 		
-		response.sendRedirect("/html/individual/success.jsp");
+		response.setRenderParameter("mvcPath", "/html/individual/success.jsp");
 	}
 }

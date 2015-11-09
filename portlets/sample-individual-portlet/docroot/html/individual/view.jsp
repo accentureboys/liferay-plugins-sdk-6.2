@@ -44,14 +44,16 @@
 	</aui:fieldset>
 	
 	<aui:fieldset>
-		<aui:select name="idType" label="证件号">
+		<aui:select name="idType" label="证件类型">
 			<aui:option label="请选择" value="0"></aui:option>
 			<aui:option label="身份证" value="id"></aui:option>
 			<aui:option label="护照" value="passport"></aui:option>
 		</aui:select>
-		<aui:input name="idNumber" type="text"></aui:input>
+		<aui:input name="idNumber" type="text" label="证件号"></aui:input>
 	</aui:fieldset>
 	<aui:button-row>
+		<aui:button class="btn btn-primary" type="submit"/>
+		<aui:button  type="reset" />
 	</aui:button-row>
 	</aui:form>
 	
