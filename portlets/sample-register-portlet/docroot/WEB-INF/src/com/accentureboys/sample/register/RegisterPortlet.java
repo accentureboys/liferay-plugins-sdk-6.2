@@ -7,6 +7,12 @@ import java.util.regex.Pattern;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
+import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -19,11 +25,13 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.ContactLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -38,6 +46,24 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class RegisterPortlet
  */
 public class RegisterPortlet extends MVCPortlet {
+	
+	VertifyCodeService vcs = new VertifyCodeService();
+	
+	@Override
+	public void doView(RenderRequest renderRequest,
+			RenderResponse renderResponse) throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		String imgSrc = vcs.createCode();
+		renderRequest.setAttribute("imgSrc", imgSrc);
+		super.doView(renderRequest, renderResponse);
+	}
+	
+	@Override
+	public void serveResource(ResourceRequest request, ResourceResponse response)
+			throws IOException {
+		String newImgSrc = vcs.createCode();
+		response.getWriter().append(newImgSrc);
+	}
 	/**
 	 * Register user on register tab
 	 * 
@@ -88,7 +114,8 @@ public class RegisterPortlet extends MVCPortlet {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = "";
-		long[] groupIds = null;
+		Group group = GroupLocalServiceUtil.fetchFriendlyURLGroup(company.getCompanyId(),"/guest");
+		long[] groupIds = {group.getGroupId()};
 		long[] organizationIds = null;
 		UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(company.getCompanyId(), "Personal");
 		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), "User");
@@ -128,6 +155,22 @@ public class RegisterPortlet extends MVCPortlet {
 					"&password=" + password1 + "&rememberMe=1";		
 		response.sendRedirect(redirect);
 	}
+	
+	protected void include(String path, RenderRequest renderRequest,
+			RenderResponse renderResponse) throws IOException, PortletException {
+
+		PortletRequestDispatcher portletRequestDispatcher = getPortletContext()
+				.getRequestDispatcher(path);
+
+		if (portletRequestDispatcher == null) {
+			_log.error(path + " is not a valid include");
+		} else {
+			portletRequestDispatcher.include(renderRequest, renderResponse);
+		}
+	}
+	 
+	protected String editTemplate;
+	protected String viewTemplate;
 	
 	private static boolean emailFormat(String email) {
 		boolean tag = true;

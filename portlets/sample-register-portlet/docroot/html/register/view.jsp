@@ -1,6 +1,8 @@
 <%@include file="/html/init.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+
 <portlet:actionURL name="registerUser" var="registerUserURL" windowState="normal" />
 
 <liferay-ui:error key="all-required" message="所有选项均为必填项！" />
@@ -78,6 +80,18 @@
                               <input class="register-input" type="text"/>
                           </div>
 
+						 <portlet:resourceURL var="getCaptcha" id="getCaptcha" />
+
+						 <div class="form-item">
+						 	<label class="register-label" for="">验证码</label>
+							<aui:input name="vertifyCode"  maxlength="4" cssClass="vertifyCode">
+								<aui:validator name="required" />
+							</aui:input>
+						<img src="${imgSrc}" class="refreshCode" onclick="refreshCode();">
+						<aui:script>
+							var getCaptchaUrl = '${getCaptcha}';
+						</aui:script>
+					</div>
 
                   </div>
               </div>
