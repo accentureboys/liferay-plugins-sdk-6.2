@@ -8,6 +8,14 @@
 <liferay-ui:error key="all-required" message="所有选项均为必填项！" />
 <liferay-ui:error key="password-not-match" message="两次密码不一致！" />
 <liferay-ui:error key="email-format-not-correct" message="邮箱格式不正确！" />
+<liferay-ui:error key="vercd-not-match" message="验证码不匹配！" />
+
+<%
+	String verifyCode = "";
+	if(request.getAttribute("verifyCode") !=null){
+		verifyCode = (String) request.getAttribute("verifyCode");
+	}
+%>
 
 <body>
 <!--main content start-->
@@ -83,12 +91,10 @@
 						 <portlet:resourceURL var="getCaptcha" id="getCaptcha" />
 
 						 <div class="form-item">
+						 	<input id="reg-ver-cd-1" name="<portlet:namespace/>reg-ver-cd-1" value="<%=verifyCode%>" type="hidden"/>
 						 	<label class="register-label" for="">验证码</label>
-							<aui:input name="vertifyCode"  maxlength="4" cssClass="vertifyCode">
-								<aui:validator name="required" />
-							</aui:input>
-						<img src="${imgSrc}" class="refreshCode" onclick="refreshCode();">
-						<aui:input type="hidden" name="hiddenVerValue" value="${verifyCode }"></aui:input>
+                          	<input class="register-input" id="reg-ver-cd-2" name="<portlet:namespace/>reg-ver-cd-2" type="text" maxlength="4" placeholder="请输入验证码" data-equal-to="#reg-ver-cd-1" required/>
+							<img src="${imgSrc}" class="refreshCode" onclick="refreshCode();">
 						<aui:script>
 							var getCaptchaUrl = '${getCaptcha}';
 						</aui:script>

@@ -3,7 +3,9 @@ function refreshCode() {
 		url: getCaptchaUrl,
 		type: 'POST',
 		success: function(newImgSrc) {
-			$(".refreshCode").attr("src", newImgSrc);
+			var resultArray = newImgSrc.split("|");
+			$(".refreshCode").attr("src", resultArray[0]);
+			$("#reg-ver-cd-1").val(resultArray[1]);
 		}
 	});
 }

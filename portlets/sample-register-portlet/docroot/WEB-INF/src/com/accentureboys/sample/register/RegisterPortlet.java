@@ -54,6 +54,8 @@ public class RegisterPortlet extends MVCPortlet {
 			RenderResponse renderResponse) throws IOException, PortletException {
 		// TODO Auto-generated method stub
 		String imgSrc = vcs.createCode();
+		String verifyCode = vcs.getCode();
+		renderRequest.setAttribute("verifyCode", verifyCode);
 		renderRequest.setAttribute("imgSrc", imgSrc);
 		super.doView(renderRequest, renderResponse);
 	}
@@ -63,8 +65,7 @@ public class RegisterPortlet extends MVCPortlet {
 			throws IOException {
 		String newImgSrc = vcs.createCode();
 		String verifyCode = vcs.getCode();
-		request.setAttribute("verifyCode", verifyCode);
-		response.getWriter().append(newImgSrc);
+		response.getWriter().append(newImgSrc+"|"+verifyCode);
 	}
 	/**
 	 * Register user on register tab
@@ -85,7 +86,8 @@ public class RegisterPortlet extends MVCPortlet {
 		String password2 = ParamUtil.getString(request, "repeat_pwd");
 		String emailAddress = ParamUtil.getString(request, "emailAddress");
 		String telphone = ParamUtil.getString(request, "telphone");
-		String verifyCode = ParamUtil.getString(request, "verifyCode");
+		String vercd1 = ParamUtil.getString(request, "reg-ver-cd-1");
+		String vercd2 = ParamUtil.getString(request, "reg-ver-cd-2");
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		Company company = themeDisplay.getCompany();
@@ -106,6 +108,12 @@ public class RegisterPortlet extends MVCPortlet {
 		if(emailFormat(emailAddress)){
 			SessionErrors.add(request, "email-format-not-correct");
 			_log.error("email-format-not-correct");
+			return;
+		}
+		//validate verification code
+		if(!vercd1.equals(vercd2)){
+			SessionErrors.add(request, "vercd-not-match");
+			_log.error("vercd-not-match");
 			return;
 		}
 		User defaultUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
