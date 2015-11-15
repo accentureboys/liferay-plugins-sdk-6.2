@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.liferay.sample">
+	<author>jasonxiang</author>
+	<namespace>SAMPLE</namespace>
+    <entity name="education" local-service="true">
+        <column name="educationId" primary="true" type="long"></column>
+        <column name="userId" type="long"></column>
+        <column name="schoolName" type="String"></column>
+        <column name="degreeId" type="long"></column>
+        <column name="majorId" type="long"></column>
+        <column name="graduateYear" type="Date"></column>
+    </entity>
+    <entity name="degree" local-service="true">
+        <column name="degreeId" type="long" primary="true"></column>
+        <column name="degreeTitile" type="String"></column>
+        <column name="userId" type="long"></column>
+    </entity>
+    <entity local-service="true" name="major">
+        <column name="majorId" type="long" primary="true"></column>
+        <column name="majorName" type="String"></column>
+        <column name="userId" type="long"></column>
+    </entity>
+    <entity name="honour" local-service="true">
+        <column name="honourId" type="long" primary="true"></column>
+        <column name="honoraryTitle" type="String"></column>
+        <column name="recommender" type="String"></column>
+        <column name="introduction" type="String"></column>
+        <column name="userId" type="long"></column>
+    </entity>
+    <entity name="thesis" local-service="true">
+        <column name="thesisId" primary="true" type="long"></column>
+        <column name="thesisTitle" type="String"></column>
+        <column name="userId" type="long"></column>
+    </entity>
+    <entity name="property" local-service="true">
+        <column name="propertyId" type="long" primary="true"></column>
+        <column name="propertyTitle" type="String"></column>
+        <column name="userId" type="long"></column>
+    </entity>
+</service-builder>
