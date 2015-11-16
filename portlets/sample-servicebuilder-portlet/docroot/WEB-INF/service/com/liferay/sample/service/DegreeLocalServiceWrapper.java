@@ -281,6 +281,18 @@ public class DegreeLocalServiceWrapper implements DegreeLocalService,
 	}
 
 	/**
+	* Get all degrees from Degree table
+	*
+	* @return List degree list
+	* @throws SystemException
+	*/
+	@Override
+	public java.util.List<com.liferay.sample.model.Degree> getAllDegrees()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _degreeLocalService.getAllDegrees();
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public DegreeLocalService getWrappedDegreeLocalService() {

@@ -14,6 +14,10 @@
 
 package com.liferay.sample.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.sample.model.Degree;
 import com.liferay.sample.service.base.DegreeLocalServiceBaseImpl;
 
 /**
@@ -36,4 +40,13 @@ public class DegreeLocalServiceImpl extends DegreeLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.sample.service.DegreeLocalServiceUtil} to access the degree local service.
 	 */
+	/**
+	 * Get all degrees from Degree table
+	 * 
+	 * @return List degree list
+	 * @throws SystemException
+	 */
+	public List<Degree> getAllDegrees() throws SystemException {
+		return degreePersistence.findAll();
+	}
 }

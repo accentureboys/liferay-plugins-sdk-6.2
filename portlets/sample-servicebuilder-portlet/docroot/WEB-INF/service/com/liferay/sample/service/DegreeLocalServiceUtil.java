@@ -271,6 +271,17 @@ public class DegreeLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Get all degrees from Degree table
+	*
+	* @return List degree list
+	* @throws SystemException
+	*/
+	public static java.util.List<com.liferay.sample.model.Degree> getAllDegrees()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAllDegrees();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

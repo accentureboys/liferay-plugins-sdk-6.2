@@ -249,4 +249,14 @@ public interface DegreeLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Get all degrees from Degree table
+	*
+	* @return List degree list
+	* @throws SystemException
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.sample.model.Degree> getAllDegrees()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

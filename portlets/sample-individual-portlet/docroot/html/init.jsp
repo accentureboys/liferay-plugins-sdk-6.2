@@ -23,10 +23,16 @@
 <%@ page import="com.liferay.portal.model.User"%>
 <%@ page import="com.liferay.portal.model.Country"%>
 <%@ page import="com.liferay.portal.service.CountryServiceUtil"%>
+<%@ page import="com.liferay.sample.model.Degree"%>
+<%@ page import="com.liferay.sample.service.DegreeLocalServiceUtil"%>
+<%@ page import="com.liferay.sample.model.Major"%>
+<%@ page import="com.liferay.sample.service.MajorLocalServiceUtil"%>
 
 <%@ page import="javax.portlet.WindowState" %>
-
+<link href="${pageContext.request.contextPath}/css/amazeui.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/amazeui.min.js"></script>
 
 <portlet:defineObjects />
 

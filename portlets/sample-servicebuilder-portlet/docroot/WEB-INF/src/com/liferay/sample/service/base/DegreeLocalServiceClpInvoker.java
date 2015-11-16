@@ -107,6 +107,10 @@ public class DegreeLocalServiceClpInvoker {
 		_methodName65 = "setBeanIdentifier";
 
 		_methodParameterTypes65 = new String[] { "java.lang.String" };
+
+		_methodName70 = "getAllDegrees";
+
+		_methodParameterTypes70 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -210,6 +214,11 @@ public class DegreeLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+			return DegreeLocalServiceUtil.getAllDegrees();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -249,4 +258,6 @@ public class DegreeLocalServiceClpInvoker {
 	private String[] _methodParameterTypes64;
 	private String _methodName65;
 	private String[] _methodParameterTypes65;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
 }
