@@ -6,8 +6,8 @@
 		module="sample-servicebuilder-portlet"
 		revision="working@JasondeMBP"
 		conf="internal"
-		confs="default, internal, provided, runtime, test"
-		date="20151103225044"/>
+		confs="default, internal"
+		date="20151116231232"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>

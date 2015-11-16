@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.liferay.sample.model.impl.DegreeModelImpl">
+		<attributes>
+			<id name="degreeId" />
+			<basic name="degreeName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.sample.model.impl.EducationModelImpl">
+		<attributes>
+			<id name="educationId" />
+			<basic name="userId" />
+			<basic name="schoolName" />
+			<basic name="degreeId" />
+			<basic name="majorId" />
+			<basic name="graduateYear" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.sample.model.impl.HonourModelImpl">
+		<attributes>
+			<id name="honourId" />
+			<basic name="honoraryName" />
+			<basic name="recommender" />
+			<basic name="introduction" />
+			<basic name="userId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.sample.model.impl.MajorModelImpl">
+		<attributes>
+			<id name="majorId" />
+			<basic name="majorName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.sample.model.impl.PropertyModelImpl">
+		<attributes>
+			<id name="propertyId" />
+			<basic name="propertyName" />
+			<basic name="userId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.sample.model.impl.ThesisModelImpl">
+		<attributes>
+			<id name="thesisId" />
+			<basic name="thesisName" />
+			<basic name="userId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.liferay.sample.model.impl.DegreeImpl" name="Degree">
+		<table name="Sample_Degree" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.sample.model.impl.EducationImpl" name="Education">
+		<table name="Sample_Education" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.sample.model.impl.HonourImpl" name="Honour">
+		<table name="Sample_Honour" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.sample.model.impl.MajorImpl" name="Major">
+		<table name="Sample_Major" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.sample.model.impl.PropertyImpl" name="Property">
+		<table name="Sample_Property" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.sample.model.impl.ThesisImpl" name="Thesis">
+		<table name="Sample_Thesis" />
+		<attributes />
+	</entity>
+</entity-mappings>

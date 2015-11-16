@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.liferay.sample.service.DegreeLocalService" class="com.liferay.sample.service.impl.DegreeLocalServiceImpl" />
+	<bean id="com.liferay.sample.service.DegreeService" class="com.liferay.sample.service.impl.DegreeServiceImpl" />
+	<bean id="com.liferay.sample.service.persistence.DegreePersistence" class="com.liferay.sample.service.persistence.DegreePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.sample.service.EducationLocalService" class="com.liferay.sample.service.impl.EducationLocalServiceImpl" />
+	<bean id="com.liferay.sample.service.EducationService" class="com.liferay.sample.service.impl.EducationServiceImpl" />
+	<bean id="com.liferay.sample.service.persistence.EducationPersistence" class="com.liferay.sample.service.persistence.EducationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.sample.service.HonourLocalService" class="com.liferay.sample.service.impl.HonourLocalServiceImpl" />
+	<bean id="com.liferay.sample.service.HonourService" class="com.liferay.sample.service.impl.HonourServiceImpl" />
+	<bean id="com.liferay.sample.service.persistence.HonourPersistence" class="com.liferay.sample.service.persistence.HonourPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.sample.service.MajorLocalService" class="com.liferay.sample.service.impl.MajorLocalServiceImpl" />
+	<bean id="com.liferay.sample.service.MajorService" class="com.liferay.sample.service.impl.MajorServiceImpl" />
+	<bean id="com.liferay.sample.service.persistence.MajorPersistence" class="com.liferay.sample.service.persistence.MajorPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.sample.service.PropertyLocalService" class="com.liferay.sample.service.impl.PropertyLocalServiceImpl" />
+	<bean id="com.liferay.sample.service.PropertyService" class="com.liferay.sample.service.impl.PropertyServiceImpl" />
+	<bean id="com.liferay.sample.service.persistence.PropertyPersistence" class="com.liferay.sample.service.persistence.PropertyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.sample.service.ThesisLocalService" class="com.liferay.sample.service.impl.ThesisLocalServiceImpl" />
+	<bean id="com.liferay.sample.service.ThesisService" class="com.liferay.sample.service.impl.ThesisServiceImpl" />
+	<bean id="com.liferay.sample.service.persistence.ThesisPersistence" class="com.liferay.sample.service.persistence.ThesisPersistenceImpl" parent="basePersistence" />
+</beans>

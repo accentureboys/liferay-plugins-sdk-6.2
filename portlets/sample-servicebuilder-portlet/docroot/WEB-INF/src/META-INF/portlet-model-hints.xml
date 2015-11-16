@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.sample.model.Degree">
+		<field name="degreeId" type="long" />
+		<field name="degreeName" type="String" />
+	</model>
+	<model name="com.liferay.sample.model.Education">
+		<field name="educationId" type="long" />
+		<field name="userId" type="long" />
+		<field name="schoolName" type="String" />
+		<field name="degreeId" type="long" />
+		<field name="majorId" type="long" />
+		<field name="graduateYear" type="String" />
+	</model>
+	<model name="com.liferay.sample.model.Honour">
+		<field name="honourId" type="long" />
+		<field name="honoraryName" type="String" />
+		<field name="recommender" type="String" />
+		<field name="introduction" type="String" />
+		<field name="userId" type="long" />
+	</model>
+	<model name="com.liferay.sample.model.Major">
+		<field name="majorId" type="long" />
+		<field name="majorName" type="String" />
+	</model>
+	<model name="com.liferay.sample.model.Property">
+		<field name="propertyId" type="long" />
+		<field name="propertyName" type="String" />
+		<field name="userId" type="long" />
+	</model>
+	<model name="com.liferay.sample.model.Thesis">
+		<field name="thesisId" type="long" />
+		<field name="thesisName" type="String" />
+		<field name="userId" type="long" />
+	</model>
+</model-hints>
