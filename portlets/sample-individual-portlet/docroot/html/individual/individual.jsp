@@ -1,7 +1,3 @@
-<%@page import="com.liferay.sample.service.MajorLocalServiceUtil"%>
-<%@page import="com.liferay.sample.model.Major"%>
-<%@page import="com.liferay.sample.service.DegreeLocalServiceUtil"%>
-<%@page import="com.liferay.sample.model.Degree"%>
 <%@include file="/html/init.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
