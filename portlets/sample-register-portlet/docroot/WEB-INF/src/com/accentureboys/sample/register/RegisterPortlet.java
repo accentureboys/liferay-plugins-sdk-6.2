@@ -2,6 +2,7 @@ package com.accentureboys.sample.register;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,14 +26,18 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.service.ContactLocalServiceUtil;
+import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.service.RegionServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -140,27 +145,10 @@ public class RegisterPortlet extends MVCPortlet {
 		
 		User user = UserLocalServiceUtil.addUserWithWorkflow(defaultUser.getUserId(), company.getCompanyId(), autoPassword, password1, password2, autoScreenName, userName, emailAddress, facebookId, "", LocaleUtil.fromLanguageId("zh_CN"), firstName, "", lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 		//add contact information
-		long contactId = CounterLocalServiceUtil.increment(Contact.class.getName());
-		Contact contact = ContactLocalServiceUtil.createContact(contactId);
-		contact.setUserId(user.getUserId());
-		contact.setCompanyId(company.getCompanyId());
-		contact.setUserName(userName);
-		contact.setMale(gender == 1L ? true : false);
-		contact.setFirstName(firstName);
-		contact.setLastName(lastName);
-		contact.setEmailAddress(emailAddress);
-		contact.setCreateDate(new Date());
-		ContactLocalServiceUtil.updateContact(contact);
-
+		ContactLocalServiceUtil.addContact(user.getUserId(), User.class.getName(), user.getUserId(), emailAddress, firstName, "", lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, "", "", "", "", "", "", "", "", "", "", jobTitle);
 		// add phone information
-		long phoneId = CounterLocalServiceUtil.increment(Phone.class.getName());
-		Phone phone = PhoneLocalServiceUtil.createPhone(phoneId);
-		phone.setUserId(user.getUserId());
-		phone.setUserName(userName);
-		phone.setNumber(telphone);
-		phone.setCompanyId(company.getCompanyId());
-		phone.setCreateDate(new Date());
-		PhoneLocalServiceUtil.updatePhone(phone);
+		PhoneLocalServiceUtil.addPhone(user.getUserId(), Contact.class.getName(), user.getContactId(), telphone, "", 11008, true);
+
 		String redirect =
 				PortalUtil.getPathMain() + "/portal/login?login=" + user.getEmailAddress() +
 					"&password=" + password1 + "&rememberMe=1";		

@@ -29,7 +29,7 @@
 			</c:forEach>
 		</aui:select>
 
-		<aui:select name="regionId" label="城市" cssClass="regionSelect" id="regionSelector">
+		<aui:select name="regionId" label="地区" cssClass="regionSelect" id="regionSelector">
 			<c:choose>
 				<c:when test="${!empty regions}">
 					<c:forEach var="region" items='${regions}'>
@@ -41,6 +41,9 @@
 				</c:otherwise>
 			</c:choose>
 		</aui:select>
+		<aui:input name="city" type="text" label="城市"></aui:input>
+		<aui:input name="zipcode" type="text" label="邮政编码"></aui:input>
+		<aui:input name="street" type="text" label="具体地址"></aui:input>
 	</aui:fieldset>
 	
 	<aui:fieldset>

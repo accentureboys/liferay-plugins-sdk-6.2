@@ -45,6 +45,9 @@ public class IndividualPortlet extends MVCPortlet {
 		long regionId = ParamUtil.getLong(request, "regionId");
 		String idType = ParamUtil.getString(request, "idType");
 		String idNumber = ParamUtil.getString(request, "idNumber");
+		String city = ParamUtil.getString(request, "city");
+		String zip = ParamUtil.getString(request, "zipcode");
+		String street = ParamUtil.getString(request, "street");
 		//get current login user
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		Company company = themeDisplay.getCompany();
@@ -67,14 +70,10 @@ public class IndividualPortlet extends MVCPortlet {
 		//add user's address information
 		List<Address> addressList = user.getAddresses();
 		if(addressList.size()==0){
-			long addressId = CounterLocalServiceUtil.increment(Address.class.getName());
-			Address address = AddressLocalServiceUtil.createAddress(addressId);
-			this.setAddress(address, user.getUserId(), user.getScreenName(), company.getCompanyId(), 
-					countryId, regionId, new Date(), RegionServiceUtil.getRegion(regionId).getName());
+			AddressLocalServiceUtil.addAddress(user.getUserId(), Contact.class.getName(), user.getContactId(), street, "", "", city, zip, regionId, countryId, 11002, true, true);
 		}else{
 			Address address = addressList.get(0);
-			this.setAddress(address, user.getUserId(), user.getScreenName(), company.getCompanyId(), 
-					countryId, regionId, new Date(), RegionServiceUtil.getRegion(regionId).getName());
+			AddressLocalServiceUtil.updateAddress(address.getAddressId(), street, "", "", city, zip, regionId, countryId, 11002, true, true);
 		}
 		UserLocalServiceUtil.updateUser(user);
 
@@ -106,32 +105,5 @@ public class IndividualPortlet extends MVCPortlet {
 		account.setCreateDate(new Date());
 		AccountLocalServiceUtil.updateAccount(account);
 		return account;
-	}
-	
-	/**
-	 * Set address object
-	 * 
-	 * @param address address object
-	 * @param userId user id
-	 * @param userName user name
-	 * @param companyId company id
-	 * @param countryId country id
-	 * @param regionId region id
-	 * @param date current system date
-	 * @param city region name
-	 * @return	new address object with informaton
-	 * @throws SystemException
-	 */
-	private Address setAddress(Address address, long userId, String userName, long companyId, 
-			long countryId, long regionId, Date date, String city) throws SystemException {
-		address.setUserId(userId);
-		address.setUserName(userName);
-		address.setCompanyId(companyId);
-		address.setCountryId(countryId);
-		address.setRegionId(regionId);
-		address.setCreateDate(date);
-		address.setCity(city);
-		AddressLocalServiceUtil.updateAddress(address);
-		return address;
 	}
 }
