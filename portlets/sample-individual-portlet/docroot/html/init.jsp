@@ -23,6 +23,8 @@
 <%@ page import="com.liferay.portal.model.User"%>
 <%@ page import="com.liferay.portal.model.Country"%>
 <%@ page import="com.liferay.portal.service.CountryServiceUtil"%>
+<%@ page import="com.liferay.portal.model.Region"%>
+<%@ page import="com.liferay.portal.service.RegionServiceUtil"%>
 <%@ page import="com.liferay.sample.model.Degree"%>
 <%@ page import="com.liferay.sample.service.DegreeLocalServiceUtil"%>
 <%@ page import="com.liferay.sample.model.Major"%>
