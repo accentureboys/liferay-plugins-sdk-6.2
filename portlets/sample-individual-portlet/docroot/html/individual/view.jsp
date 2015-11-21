@@ -1,3 +1,4 @@
+<%@page import="com.liferay.portal.service.AddressLocalServiceUtil"%>
 <%@page import="com.liferay.portal.model.Address"%>
 <%@include file="/html/init.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -5,17 +6,21 @@
 <%
 	User selUser = PortalUtil.getSelectedUser(request);
 	selUser = PortalUtil.getUser(request);
-	Address address = selUser.getAddresses().get(0);
+	List<Address> addressList = selUser.getAddresses();
+	Address address = null;
 	long countryId = 0L;
 	long regionId = 0L;
 	String countryName = "请选择";
 	String regionName = "请选择";
-	if(address != null){
-		countryId = address.getCountryId();
-		regionId = address.getRegionId();
-		countryName = CountryServiceUtil.getCountry(countryId).getName();
-		regionName = RegionServiceUtil.getRegion(regionId).getName();
-	}
+	if(addressList.size() != 0){
+		address = addressList.get(0);
+		if(address != null){
+			countryId = address.getCountryId();
+			regionId = address.getRegionId();
+			countryName = CountryServiceUtil.getCountry(countryId).getName();
+			regionName = RegionServiceUtil.getRegion(regionId).getName();
+		}
+	}	
 	String currentURL = PortalUtil.getCurrentURL(request);
 	String editPortraitUrl = themeDisplay.getPortalURL()+"/group/control_panel/manage?p_p_id=2&p_p_lifecy‌​cle=0&p_p_state=pop_up&p_p_mode=view&_2_portrait_id=0&_2_p_u_i_d="+themeDisplay.getUserId()+"&_2_struts_action=%2Fmy_account%2Fedit_user_portrait";
 	List<com.liferay.portal.model.Country> allCountries = CountryServiceUtil.getCountries();
