@@ -271,6 +271,17 @@ public class ThesisLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Get thesis list by userId
+	*
+	* @param userId the userId
+	* @return thesis list
+	*/
+	public static java.util.List<com.liferay.sample.model.Thesis> getThesisListByUserId(
+		long userId) {
+		return getService().getThesisListByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

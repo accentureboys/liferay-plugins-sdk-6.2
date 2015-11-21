@@ -88,36 +88,6 @@ public interface HonourModel extends BaseModel<Honour> {
 	public void setHonoraryName(String honoraryName);
 
 	/**
-	 * Returns the recommender of this honour.
-	 *
-	 * @return the recommender of this honour
-	 */
-	@AutoEscape
-	public String getRecommender();
-
-	/**
-	 * Sets the recommender of this honour.
-	 *
-	 * @param recommender the recommender of this honour
-	 */
-	public void setRecommender(String recommender);
-
-	/**
-	 * Returns the introduction of this honour.
-	 *
-	 * @return the introduction of this honour
-	 */
-	@AutoEscape
-	public String getIntroduction();
-
-	/**
-	 * Sets the introduction of this honour.
-	 *
-	 * @param introduction the introduction of this honour
-	 */
-	public void setIntroduction(String introduction);
-
-	/**
 	 * Returns the user ID of this honour.
 	 *
 	 * @return the user ID of this honour

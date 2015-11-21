@@ -14,6 +14,10 @@
 
 package com.liferay.sample.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.sample.model.Thesis;
 import com.liferay.sample.service.base.ThesisLocalServiceBaseImpl;
 
 /**
@@ -36,4 +40,19 @@ public class ThesisLocalServiceImpl extends ThesisLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.sample.service.ThesisLocalServiceUtil} to access the thesis local service.
 	 */
+	/**
+	 * Get thesis list by userId
+	 * 
+	 * @param userId the userId
+	 * @return thesis list
+	 */
+	public List<Thesis> getThesisListByUserId(long userId) {
+		try {
+			return thesisPersistence.findByuserId(userId);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

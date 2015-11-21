@@ -274,6 +274,17 @@ public class PropertyLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Get property list by userId
+	*
+	* @param userId the user id
+	* @return property list
+	*/
+	public static java.util.List<com.liferay.sample.model.Property> getPropertyListByUserId(
+		long userId) {
+		return getService().getPropertyListByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -283,6 +283,17 @@ public class EducationLocalServiceWrapper implements EducationLocalService,
 	}
 
 	/**
+	* Get education object by userId
+	*
+	* @param userId the user id
+	* @return Education object
+	*/
+	@Override
+	public com.liferay.sample.model.Education getEducationByUserId(long userId) {
+		return _educationLocalService.getEducationByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public EducationLocalService getWrappedEducationLocalService() {

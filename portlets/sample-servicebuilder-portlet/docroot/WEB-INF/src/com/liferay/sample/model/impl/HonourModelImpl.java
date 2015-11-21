@@ -67,11 +67,9 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "honourId", Types.BIGINT },
 			{ "honoraryName", Types.VARCHAR },
-			{ "recommender", Types.VARCHAR },
-			{ "introduction", Types.VARCHAR },
 			{ "userId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Sample_Honour (honourId LONG not null primary key,honoraryName VARCHAR(75) null,recommender VARCHAR(75) null,introduction VARCHAR(75) null,userId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Sample_Honour (honourId LONG not null primary key,honoraryName VARCHAR(75) null,userId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Sample_Honour";
 	public static final String ORDER_BY_JPQL = " ORDER BY honour.honourId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Sample_Honour.honourId ASC";
@@ -84,7 +82,11 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.sample.model.Honour"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.sample.model.Honour"),
+			true);
+	public static long USERID_COLUMN_BITMASK = 1L;
+	public static long HONOURID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -101,8 +103,6 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 		model.setHonourId(soapModel.getHonourId());
 		model.setHonoraryName(soapModel.getHonoraryName());
-		model.setRecommender(soapModel.getRecommender());
-		model.setIntroduction(soapModel.getIntroduction());
 		model.setUserId(soapModel.getUserId());
 
 		return model;
@@ -170,8 +170,6 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 		attributes.put("honourId", getHonourId());
 		attributes.put("honoraryName", getHonoraryName());
-		attributes.put("recommender", getRecommender());
-		attributes.put("introduction", getIntroduction());
 		attributes.put("userId", getUserId());
 
 		return attributes;
@@ -189,18 +187,6 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 		if (honoraryName != null) {
 			setHonoraryName(honoraryName);
-		}
-
-		String recommender = (String)attributes.get("recommender");
-
-		if (recommender != null) {
-			setRecommender(recommender);
-		}
-
-		String introduction = (String)attributes.get("introduction");
-
-		if (introduction != null) {
-			setIntroduction(introduction);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -239,44 +225,20 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 	@JSON
 	@Override
-	public String getRecommender() {
-		if (_recommender == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _recommender;
-		}
-	}
-
-	@Override
-	public void setRecommender(String recommender) {
-		_recommender = recommender;
-	}
-
-	@JSON
-	@Override
-	public String getIntroduction() {
-		if (_introduction == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _introduction;
-		}
-	}
-
-	@Override
-	public void setIntroduction(String introduction) {
-		_introduction = introduction;
-	}
-
-	@JSON
-	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -288,6 +250,14 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -319,8 +289,6 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 		honourImpl.setHonourId(getHonourId());
 		honourImpl.setHonoraryName(getHonoraryName());
-		honourImpl.setRecommender(getRecommender());
-		honourImpl.setIntroduction(getIntroduction());
 		honourImpl.setUserId(getUserId());
 
 		honourImpl.resetOriginalValues();
@@ -372,6 +340,13 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 	@Override
 	public void resetOriginalValues() {
+		HonourModelImpl honourModelImpl = this;
+
+		honourModelImpl._originalUserId = honourModelImpl._userId;
+
+		honourModelImpl._setOriginalUserId = false;
+
+		honourModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -388,22 +363,6 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 			honourCacheModel.honoraryName = null;
 		}
 
-		honourCacheModel.recommender = getRecommender();
-
-		String recommender = honourCacheModel.recommender;
-
-		if ((recommender != null) && (recommender.length() == 0)) {
-			honourCacheModel.recommender = null;
-		}
-
-		honourCacheModel.introduction = getIntroduction();
-
-		String introduction = honourCacheModel.introduction;
-
-		if ((introduction != null) && (introduction.length() == 0)) {
-			honourCacheModel.introduction = null;
-		}
-
 		honourCacheModel.userId = getUserId();
 
 		return honourCacheModel;
@@ -411,16 +370,12 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{honourId=");
 		sb.append(getHonourId());
 		sb.append(", honoraryName=");
 		sb.append(getHonoraryName());
-		sb.append(", recommender=");
-		sb.append(getRecommender());
-		sb.append(", introduction=");
-		sb.append(getIntroduction());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append("}");
@@ -430,7 +385,7 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.sample.model.Honour");
@@ -443,14 +398,6 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 		sb.append(
 			"<column><column-name>honoraryName</column-name><column-value><![CDATA[");
 		sb.append(getHonoraryName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>recommender</column-name><column-value><![CDATA[");
-		sb.append(getRecommender());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>introduction</column-name><column-value><![CDATA[");
-		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -466,9 +413,10 @@ public class HonourModelImpl extends BaseModelImpl<Honour>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Honour.class };
 	private long _honourId;
 	private String _honoraryName;
-	private String _recommender;
-	private String _introduction;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
+	private long _columnBitmask;
 	private Honour _escapedModel;
 }

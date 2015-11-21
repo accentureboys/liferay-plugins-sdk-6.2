@@ -283,6 +283,18 @@ public class PropertyLocalServiceWrapper implements PropertyLocalService,
 	}
 
 	/**
+	* Get property list by userId
+	*
+	* @param userId the user id
+	* @return property list
+	*/
+	@Override
+	public java.util.List<com.liferay.sample.model.Property> getPropertyListByUserId(
+		long userId) {
+		return _propertyLocalService.getPropertyListByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public PropertyLocalService getWrappedPropertyLocalService() {

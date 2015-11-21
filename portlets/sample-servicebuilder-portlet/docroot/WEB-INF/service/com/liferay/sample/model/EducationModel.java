@@ -131,20 +131,6 @@ public interface EducationModel extends BaseModel<Education> {
 	public void setDegreeId(long degreeId);
 
 	/**
-	 * Returns the major ID of this education.
-	 *
-	 * @return the major ID of this education
-	 */
-	public long getMajorId();
-
-	/**
-	 * Sets the major ID of this education.
-	 *
-	 * @param majorId the major ID of this education
-	 */
-	public void setMajorId(long majorId);
-
-	/**
 	 * Returns the graduate year of this education.
 	 *
 	 * @return the graduate year of this education
@@ -158,6 +144,36 @@ public interface EducationModel extends BaseModel<Education> {
 	 * @param graduateYear the graduate year of this education
 	 */
 	public void setGraduateYear(String graduateYear);
+
+	/**
+	 * Returns the recommender of this education.
+	 *
+	 * @return the recommender of this education
+	 */
+	@AutoEscape
+	public String getRecommender();
+
+	/**
+	 * Sets the recommender of this education.
+	 *
+	 * @param recommender the recommender of this education
+	 */
+	public void setRecommender(String recommender);
+
+	/**
+	 * Returns the introduction of this education.
+	 *
+	 * @return the introduction of this education
+	 */
+	@AutoEscape
+	public String getIntroduction();
+
+	/**
+	 * Sets the introduction of this education.
+	 *
+	 * @param introduction the introduction of this education
+	 */
+	public void setIntroduction(String introduction);
 
 	@Override
 	public boolean isNew();

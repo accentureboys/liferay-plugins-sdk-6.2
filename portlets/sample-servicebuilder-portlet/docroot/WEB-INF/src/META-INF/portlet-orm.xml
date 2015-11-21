@@ -22,8 +22,9 @@
 			<basic name="userId" />
 			<basic name="schoolName" />
 			<basic name="degreeId" />
-			<basic name="majorId" />
 			<basic name="graduateYear" />
+			<basic name="recommender" />
+			<basic name="introduction" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -34,22 +35,11 @@
 		<attributes>
 			<id name="honourId" />
 			<basic name="honoraryName" />
-			<basic name="recommender" />
-			<basic name="introduction" />
 			<basic name="userId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.sample.model.impl.MajorModelImpl">
-		<attributes>
-			<id name="majorId" />
-			<basic name="majorName" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.sample.model.impl.PropertyModelImpl">
@@ -84,10 +74,6 @@
 	</entity>
 	<entity class="com.liferay.sample.model.impl.HonourImpl" name="Honour">
 		<table name="Sample_Honour" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.sample.model.impl.MajorImpl" name="Major">
-		<table name="Sample_Major" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.sample.model.impl.PropertyImpl" name="Property">

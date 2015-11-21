@@ -28,7 +28,6 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.sample.model.DegreeClp;
 import com.liferay.sample.model.EducationClp;
 import com.liferay.sample.model.HonourClp;
-import com.liferay.sample.model.MajorClp;
 import com.liferay.sample.model.PropertyClp;
 import com.liferay.sample.model.ThesisClp;
 
@@ -119,10 +118,6 @@ public class ClpSerializer {
 			return translateInputHonour(oldModel);
 		}
 
-		if (oldModelClassName.equals(MajorClp.class.getName())) {
-			return translateInputMajor(oldModel);
-		}
-
 		if (oldModelClassName.equals(PropertyClp.class.getName())) {
 			return translateInputProperty(oldModel);
 		}
@@ -170,16 +165,6 @@ public class ClpSerializer {
 		HonourClp oldClpModel = (HonourClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getHonourRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
-	public static Object translateInputMajor(BaseModel<?> oldModel) {
-		MajorClp oldClpModel = (MajorClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getMajorRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -298,42 +283,6 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals("com.liferay.sample.model.impl.HonourImpl")) {
 			return translateOutputHonour(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
-		if (oldModelClassName.equals("com.liferay.sample.model.impl.MajorImpl")) {
-			return translateOutputMajor(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -533,10 +482,6 @@ public class ClpSerializer {
 			return new com.liferay.sample.NoSuchHonourException();
 		}
 
-		if (className.equals("com.liferay.sample.NoSuchMajorException")) {
-			return new com.liferay.sample.NoSuchMajorException();
-		}
-
 		if (className.equals("com.liferay.sample.NoSuchPropertyException")) {
 			return new com.liferay.sample.NoSuchPropertyException();
 		}
@@ -574,16 +519,6 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setHonourRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputMajor(BaseModel<?> oldModel) {
-		MajorClp newModel = new MajorClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setMajorRemoteModel(oldModel);
 
 		return newModel;
 	}

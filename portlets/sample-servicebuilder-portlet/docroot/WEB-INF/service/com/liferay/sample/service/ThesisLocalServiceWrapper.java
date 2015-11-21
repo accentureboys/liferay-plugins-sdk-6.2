@@ -281,6 +281,18 @@ public class ThesisLocalServiceWrapper implements ThesisLocalService,
 	}
 
 	/**
+	* Get thesis list by userId
+	*
+	* @param userId the userId
+	* @return thesis list
+	*/
+	@Override
+	public java.util.List<com.liferay.sample.model.Thesis> getThesisListByUserId(
+		long userId) {
+		return _thesisLocalService.getThesisListByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public ThesisLocalService getWrappedThesisLocalService() {

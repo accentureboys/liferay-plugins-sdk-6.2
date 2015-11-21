@@ -35,16 +35,12 @@ import java.io.ObjectOutput;
 public class HonourCacheModel implements CacheModel<Honour>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{honourId=");
 		sb.append(honourId);
 		sb.append(", honoraryName=");
 		sb.append(honoraryName);
-		sb.append(", recommender=");
-		sb.append(recommender);
-		sb.append(", introduction=");
-		sb.append(introduction);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append("}");
@@ -65,20 +61,6 @@ public class HonourCacheModel implements CacheModel<Honour>, Externalizable {
 			honourImpl.setHonoraryName(honoraryName);
 		}
 
-		if (recommender == null) {
-			honourImpl.setRecommender(StringPool.BLANK);
-		}
-		else {
-			honourImpl.setRecommender(recommender);
-		}
-
-		if (introduction == null) {
-			honourImpl.setIntroduction(StringPool.BLANK);
-		}
-		else {
-			honourImpl.setIntroduction(introduction);
-		}
-
 		honourImpl.setUserId(userId);
 
 		honourImpl.resetOriginalValues();
@@ -90,8 +72,6 @@ public class HonourCacheModel implements CacheModel<Honour>, Externalizable {
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		honourId = objectInput.readLong();
 		honoraryName = objectInput.readUTF();
-		recommender = objectInput.readUTF();
-		introduction = objectInput.readUTF();
 		userId = objectInput.readLong();
 	}
 
@@ -107,26 +87,10 @@ public class HonourCacheModel implements CacheModel<Honour>, Externalizable {
 			objectOutput.writeUTF(honoraryName);
 		}
 
-		if (recommender == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(recommender);
-		}
-
-		if (introduction == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(introduction);
-		}
-
 		objectOutput.writeLong(userId);
 	}
 
 	public long honourId;
 	public String honoraryName;
-	public String recommender;
-	public String introduction;
 	public long userId;
 }

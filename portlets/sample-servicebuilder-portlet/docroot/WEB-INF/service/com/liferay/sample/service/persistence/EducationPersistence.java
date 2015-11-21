@@ -38,6 +38,61 @@ public interface EducationPersistence extends BasePersistence<Education> {
 	 */
 
 	/**
+	* Returns the education where userId = &#63; or throws a {@link com.liferay.sample.NoSuchEducationException} if it could not be found.
+	*
+	* @param userId the user ID
+	* @return the matching education
+	* @throws com.liferay.sample.NoSuchEducationException if a matching education could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.sample.model.Education findByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchEducationException;
+
+	/**
+	* Returns the education where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param userId the user ID
+	* @return the matching education, or <code>null</code> if a matching education could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.sample.model.Education fetchByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the education where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param userId the user ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching education, or <code>null</code> if a matching education could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.sample.model.Education fetchByuserId(long userId,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the education where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @return the education that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.sample.model.Education removeByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchEducationException;
+
+	/**
+	* Returns the number of educations where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching educations
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the education in the entity cache if it is enabled.
 	*
 	* @param education the education

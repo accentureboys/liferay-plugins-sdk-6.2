@@ -14,6 +14,10 @@
 
 package com.liferay.sample.service.impl;
 
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.sample.model.Property;
 import com.liferay.sample.service.base.PropertyLocalServiceBaseImpl;
 
 /**
@@ -36,4 +40,19 @@ public class PropertyLocalServiceImpl extends PropertyLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.liferay.sample.service.PropertyLocalServiceUtil} to access the property local service.
 	 */
+	/**
+	 * Get property list by userId
+	 * 
+	 * @param userId the user id
+	 * @return property list
+	 */
+	public List<Property> getPropertyListByUserId(long userId) {
+		try {
+			return propertyPersistence.findByuserId(userId);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

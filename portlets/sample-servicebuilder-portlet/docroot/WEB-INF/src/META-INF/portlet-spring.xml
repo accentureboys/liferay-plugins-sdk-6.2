@@ -10,9 +10,6 @@
 	<bean id="com.liferay.sample.service.HonourLocalService" class="com.liferay.sample.service.impl.HonourLocalServiceImpl" />
 	<bean id="com.liferay.sample.service.HonourService" class="com.liferay.sample.service.impl.HonourServiceImpl" />
 	<bean id="com.liferay.sample.service.persistence.HonourPersistence" class="com.liferay.sample.service.persistence.HonourPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.sample.service.MajorLocalService" class="com.liferay.sample.service.impl.MajorLocalServiceImpl" />
-	<bean id="com.liferay.sample.service.MajorService" class="com.liferay.sample.service.impl.MajorServiceImpl" />
-	<bean id="com.liferay.sample.service.persistence.MajorPersistence" class="com.liferay.sample.service.persistence.MajorPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.sample.service.PropertyLocalService" class="com.liferay.sample.service.impl.PropertyLocalServiceImpl" />
 	<bean id="com.liferay.sample.service.PropertyService" class="com.liferay.sample.service.impl.PropertyServiceImpl" />
 	<bean id="com.liferay.sample.service.persistence.PropertyPersistence" class="com.liferay.sample.service.persistence.PropertyPersistenceImpl" parent="basePersistence" />

@@ -82,7 +82,11 @@ public class PropertyModelImpl extends BaseModelImpl<Property>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.sample.model.Property"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.sample.model.Property"),
+			true);
+	public static long USERID_COLUMN_BITMASK = 1L;
+	public static long PROPERTYID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -227,6 +231,14 @@ public class PropertyModelImpl extends BaseModelImpl<Property>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -238,6 +250,14 @@ public class PropertyModelImpl extends BaseModelImpl<Property>
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -320,6 +340,13 @@ public class PropertyModelImpl extends BaseModelImpl<Property>
 
 	@Override
 	public void resetOriginalValues() {
+		PropertyModelImpl propertyModelImpl = this;
+
+		propertyModelImpl._originalUserId = propertyModelImpl._userId;
+
+		propertyModelImpl._setOriginalUserId = false;
+
+		propertyModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -390,5 +417,8 @@ public class PropertyModelImpl extends BaseModelImpl<Property>
 	private String _propertyName;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
+	private long _columnBitmask;
 	private Property _escapedModel;
 }

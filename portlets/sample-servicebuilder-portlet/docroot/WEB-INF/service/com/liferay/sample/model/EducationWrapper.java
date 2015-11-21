@@ -52,8 +52,9 @@ public class EducationWrapper implements Education, ModelWrapper<Education> {
 		attributes.put("userId", getUserId());
 		attributes.put("schoolName", getSchoolName());
 		attributes.put("degreeId", getDegreeId());
-		attributes.put("majorId", getMajorId());
 		attributes.put("graduateYear", getGraduateYear());
+		attributes.put("recommender", getRecommender());
+		attributes.put("introduction", getIntroduction());
 
 		return attributes;
 	}
@@ -84,16 +85,22 @@ public class EducationWrapper implements Education, ModelWrapper<Education> {
 			setDegreeId(degreeId);
 		}
 
-		Long majorId = (Long)attributes.get("majorId");
-
-		if (majorId != null) {
-			setMajorId(majorId);
-		}
-
 		String graduateYear = (String)attributes.get("graduateYear");
 
 		if (graduateYear != null) {
 			setGraduateYear(graduateYear);
+		}
+
+		String recommender = (String)attributes.get("recommender");
+
+		if (recommender != null) {
+			setRecommender(recommender);
+		}
+
+		String introduction = (String)attributes.get("introduction");
+
+		if (introduction != null) {
+			setIntroduction(introduction);
 		}
 	}
 
@@ -220,26 +227,6 @@ public class EducationWrapper implements Education, ModelWrapper<Education> {
 	}
 
 	/**
-	* Returns the major ID of this education.
-	*
-	* @return the major ID of this education
-	*/
-	@Override
-	public long getMajorId() {
-		return _education.getMajorId();
-	}
-
-	/**
-	* Sets the major ID of this education.
-	*
-	* @param majorId the major ID of this education
-	*/
-	@Override
-	public void setMajorId(long majorId) {
-		_education.setMajorId(majorId);
-	}
-
-	/**
 	* Returns the graduate year of this education.
 	*
 	* @return the graduate year of this education
@@ -257,6 +244,46 @@ public class EducationWrapper implements Education, ModelWrapper<Education> {
 	@Override
 	public void setGraduateYear(java.lang.String graduateYear) {
 		_education.setGraduateYear(graduateYear);
+	}
+
+	/**
+	* Returns the recommender of this education.
+	*
+	* @return the recommender of this education
+	*/
+	@Override
+	public java.lang.String getRecommender() {
+		return _education.getRecommender();
+	}
+
+	/**
+	* Sets the recommender of this education.
+	*
+	* @param recommender the recommender of this education
+	*/
+	@Override
+	public void setRecommender(java.lang.String recommender) {
+		_education.setRecommender(recommender);
+	}
+
+	/**
+	* Returns the introduction of this education.
+	*
+	* @return the introduction of this education
+	*/
+	@Override
+	public java.lang.String getIntroduction() {
+		return _education.getIntroduction();
+	}
+
+	/**
+	* Sets the introduction of this education.
+	*
+	* @param introduction the introduction of this education
+	*/
+	@Override
+	public void setIntroduction(java.lang.String introduction) {
+		_education.setIntroduction(introduction);
 	}
 
 	@Override

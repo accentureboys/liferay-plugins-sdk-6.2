@@ -100,13 +100,17 @@ public class ThesisLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.liferay.sample.model.Thesis" };
 
-		_methodName64 = "getBeanIdentifier";
+		_methodName58 = "getBeanIdentifier";
 
-		_methodParameterTypes64 = new String[] {  };
+		_methodParameterTypes58 = new String[] {  };
 
-		_methodName65 = "setBeanIdentifier";
+		_methodName59 = "setBeanIdentifier";
 
-		_methodParameterTypes65 = new String[] { "java.lang.String" };
+		_methodParameterTypes59 = new String[] { "java.lang.String" };
+
+		_methodName64 = "getThesisListByUserId";
+
+		_methodParameterTypes64 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -198,16 +202,21 @@ public class ThesisLocalServiceClpInvoker {
 			return ThesisLocalServiceUtil.updateThesis((com.liferay.sample.model.Thesis)arguments[0]);
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return ThesisLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			ThesisLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
+		}
+
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+			return ThesisLocalServiceUtil.getThesisListByUserId(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -245,8 +254,10 @@ public class ThesisLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
-	private String _methodName65;
-	private String[] _methodParameterTypes65;
 }

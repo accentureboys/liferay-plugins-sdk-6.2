@@ -82,7 +82,11 @@ public class ThesisModelImpl extends BaseModelImpl<Thesis>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.sample.model.Thesis"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.sample.model.Thesis"),
+			true);
+	public static long USERID_COLUMN_BITMASK = 1L;
+	public static long THESISID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -227,6 +231,14 @@ public class ThesisModelImpl extends BaseModelImpl<Thesis>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -238,6 +250,14 @@ public class ThesisModelImpl extends BaseModelImpl<Thesis>
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -320,6 +340,13 @@ public class ThesisModelImpl extends BaseModelImpl<Thesis>
 
 	@Override
 	public void resetOriginalValues() {
+		ThesisModelImpl thesisModelImpl = this;
+
+		thesisModelImpl._originalUserId = thesisModelImpl._userId;
+
+		thesisModelImpl._setOriginalUserId = false;
+
+		thesisModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -388,5 +415,8 @@ public class ThesisModelImpl extends BaseModelImpl<Thesis>
 	private String _thesisName;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
+	private long _columnBitmask;
 	private Thesis _escapedModel;
 }

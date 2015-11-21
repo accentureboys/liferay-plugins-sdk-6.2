@@ -34,8 +34,9 @@ public class EducationSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setSchoolName(model.getSchoolName());
 		soapModel.setDegreeId(model.getDegreeId());
-		soapModel.setMajorId(model.getMajorId());
 		soapModel.setGraduateYear(model.getGraduateYear());
+		soapModel.setRecommender(model.getRecommender());
+		soapModel.setIntroduction(model.getIntroduction());
 
 		return soapModel;
 	}
@@ -120,14 +121,6 @@ public class EducationSoap implements Serializable {
 		_degreeId = degreeId;
 	}
 
-	public long getMajorId() {
-		return _majorId;
-	}
-
-	public void setMajorId(long majorId) {
-		_majorId = majorId;
-	}
-
 	public String getGraduateYear() {
 		return _graduateYear;
 	}
@@ -136,10 +129,27 @@ public class EducationSoap implements Serializable {
 		_graduateYear = graduateYear;
 	}
 
+	public String getRecommender() {
+		return _recommender;
+	}
+
+	public void setRecommender(String recommender) {
+		_recommender = recommender;
+	}
+
+	public String getIntroduction() {
+		return _introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		_introduction = introduction;
+	}
+
 	private long _educationId;
 	private long _userId;
 	private String _schoolName;
 	private long _degreeId;
-	private long _majorId;
 	private String _graduateYear;
+	private String _recommender;
+	private String _introduction;
 }

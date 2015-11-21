@@ -110,6 +110,166 @@ public class PropertyUtil {
 	}
 
 	/**
+	* Returns all the properties where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching properties
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.sample.model.Property> findByuserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByuserId(userId);
+	}
+
+	/**
+	* Returns a range of all the properties where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.sample.model.impl.PropertyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of properties
+	* @param end the upper bound of the range of properties (not inclusive)
+	* @return the range of matching properties
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.sample.model.Property> findByuserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByuserId(userId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the properties where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.sample.model.impl.PropertyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of properties
+	* @param end the upper bound of the range of properties (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching properties
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.sample.model.Property> findByuserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByuserId(userId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first property in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching property
+	* @throws com.liferay.sample.NoSuchPropertyException if a matching property could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Property findByuserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchPropertyException {
+		return getPersistence().findByuserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the first property in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching property, or <code>null</code> if a matching property could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Property fetchByuserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByuserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last property in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching property
+	* @throws com.liferay.sample.NoSuchPropertyException if a matching property could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Property findByuserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchPropertyException {
+		return getPersistence().findByuserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last property in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching property, or <code>null</code> if a matching property could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Property fetchByuserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByuserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the properties before and after the current property in the ordered set where userId = &#63;.
+	*
+	* @param propertyId the primary key of the current property
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next property
+	* @throws com.liferay.sample.NoSuchPropertyException if a property with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Property[] findByuserId_PrevAndNext(
+		long propertyId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchPropertyException {
+		return getPersistence()
+				   .findByuserId_PrevAndNext(propertyId, userId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the properties where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByuserId(userId);
+	}
+
+	/**
+	* Returns the number of properties where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching properties
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByuserId(userId);
+	}
+
+	/**
 	* Caches the property in the entity cache if it is enabled.
 	*
 	* @param property the property

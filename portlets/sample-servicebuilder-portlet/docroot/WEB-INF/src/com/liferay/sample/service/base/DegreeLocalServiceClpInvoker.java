@@ -100,17 +100,17 @@ public class DegreeLocalServiceClpInvoker {
 
 		_methodParameterTypes15 = new String[] { "com.liferay.sample.model.Degree" };
 
-		_methodName64 = "getBeanIdentifier";
+		_methodName58 = "getBeanIdentifier";
+
+		_methodParameterTypes58 = new String[] {  };
+
+		_methodName59 = "setBeanIdentifier";
+
+		_methodParameterTypes59 = new String[] { "java.lang.String" };
+
+		_methodName64 = "getAllDegrees";
 
 		_methodParameterTypes64 = new String[] {  };
-
-		_methodName65 = "setBeanIdentifier";
-
-		_methodParameterTypes65 = new String[] { "java.lang.String" };
-
-		_methodName70 = "getAllDegrees";
-
-		_methodParameterTypes70 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -202,20 +202,20 @@ public class DegreeLocalServiceClpInvoker {
 			return DegreeLocalServiceUtil.updateDegree((com.liferay.sample.model.Degree)arguments[0]);
 		}
 
-		if (_methodName64.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return DegreeLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName65.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			DegreeLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName70.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return DegreeLocalServiceUtil.getAllDegrees();
 		}
 
@@ -254,10 +254,10 @@ public class DegreeLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
-	private String _methodName65;
-	private String[] _methodParameterTypes65;
-	private String _methodName70;
-	private String[] _methodParameterTypes70;
 }

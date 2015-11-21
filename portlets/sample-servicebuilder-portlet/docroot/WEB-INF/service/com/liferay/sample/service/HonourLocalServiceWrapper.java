@@ -281,6 +281,18 @@ public class HonourLocalServiceWrapper implements HonourLocalService,
 	}
 
 	/**
+	* Get honour list by user id
+	*
+	* @param userId the user id
+	* @return Honour list
+	*/
+	@Override
+	public java.util.List<com.liferay.sample.model.Honour> getHonourListByUserId(
+		long userId) {
+		return _honourLocalService.getHonourListByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public HonourLocalService getWrappedHonourLocalService() {

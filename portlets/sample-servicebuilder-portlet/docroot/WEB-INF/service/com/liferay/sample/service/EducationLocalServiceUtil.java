@@ -275,6 +275,17 @@ public class EducationLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Get education object by userId
+	*
+	* @param userId the user id
+	* @return Education object
+	*/
+	public static com.liferay.sample.model.Education getEducationByUserId(
+		long userId) {
+		return getService().getEducationByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

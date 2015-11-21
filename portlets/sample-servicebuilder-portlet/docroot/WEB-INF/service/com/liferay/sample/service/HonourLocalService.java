@@ -249,4 +249,14 @@ public interface HonourLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Get honour list by user id
+	*
+	* @param userId the user id
+	* @return Honour list
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.sample.model.Honour> getHonourListByUserId(
+		long userId);
 }

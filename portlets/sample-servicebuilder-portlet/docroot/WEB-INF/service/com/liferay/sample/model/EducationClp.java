@@ -77,8 +77,9 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 		attributes.put("userId", getUserId());
 		attributes.put("schoolName", getSchoolName());
 		attributes.put("degreeId", getDegreeId());
-		attributes.put("majorId", getMajorId());
 		attributes.put("graduateYear", getGraduateYear());
+		attributes.put("recommender", getRecommender());
+		attributes.put("introduction", getIntroduction());
 
 		return attributes;
 	}
@@ -109,16 +110,22 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 			setDegreeId(degreeId);
 		}
 
-		Long majorId = (Long)attributes.get("majorId");
-
-		if (majorId != null) {
-			setMajorId(majorId);
-		}
-
 		String graduateYear = (String)attributes.get("graduateYear");
 
 		if (graduateYear != null) {
 			setGraduateYear(graduateYear);
+		}
+
+		String recommender = (String)attributes.get("recommender");
+
+		if (recommender != null) {
+			setRecommender(recommender);
+		}
+
+		String introduction = (String)attributes.get("introduction");
+
+		if (introduction != null) {
+			setIntroduction(introduction);
 		}
 	}
 
@@ -225,29 +232,6 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 	}
 
 	@Override
-	public long getMajorId() {
-		return _majorId;
-	}
-
-	@Override
-	public void setMajorId(long majorId) {
-		_majorId = majorId;
-
-		if (_educationRemoteModel != null) {
-			try {
-				Class<?> clazz = _educationRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setMajorId", long.class);
-
-				method.invoke(_educationRemoteModel, majorId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
 	public String getGraduateYear() {
 		return _graduateYear;
 	}
@@ -263,6 +247,52 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 				Method method = clazz.getMethod("setGraduateYear", String.class);
 
 				method.invoke(_educationRemoteModel, graduateYear);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getRecommender() {
+		return _recommender;
+	}
+
+	@Override
+	public void setRecommender(String recommender) {
+		_recommender = recommender;
+
+		if (_educationRemoteModel != null) {
+			try {
+				Class<?> clazz = _educationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setRecommender", String.class);
+
+				method.invoke(_educationRemoteModel, recommender);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getIntroduction() {
+		return _introduction;
+	}
+
+	@Override
+	public void setIntroduction(String introduction) {
+		_introduction = introduction;
+
+		if (_educationRemoteModel != null) {
+			try {
+				Class<?> clazz = _educationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setIntroduction", String.class);
+
+				method.invoke(_educationRemoteModel, introduction);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -343,8 +373,9 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 		clone.setUserId(getUserId());
 		clone.setSchoolName(getSchoolName());
 		clone.setDegreeId(getDegreeId());
-		clone.setMajorId(getMajorId());
 		clone.setGraduateYear(getGraduateYear());
+		clone.setRecommender(getRecommender());
+		clone.setIntroduction(getIntroduction());
 
 		return clone;
 	}
@@ -397,7 +428,7 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{educationId=");
 		sb.append(getEducationId());
@@ -407,10 +438,12 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 		sb.append(getSchoolName());
 		sb.append(", degreeId=");
 		sb.append(getDegreeId());
-		sb.append(", majorId=");
-		sb.append(getMajorId());
 		sb.append(", graduateYear=");
 		sb.append(getGraduateYear());
+		sb.append(", recommender=");
+		sb.append(getRecommender());
+		sb.append(", introduction=");
+		sb.append(getIntroduction());
 		sb.append("}");
 
 		return sb.toString();
@@ -418,7 +451,7 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.sample.model.Education");
@@ -441,12 +474,16 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 		sb.append(getDegreeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>majorId</column-name><column-value><![CDATA[");
-		sb.append(getMajorId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>graduateYear</column-name><column-value><![CDATA[");
 		sb.append(getGraduateYear());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>recommender</column-name><column-value><![CDATA[");
+		sb.append(getRecommender());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>introduction</column-name><column-value><![CDATA[");
+		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -459,8 +496,9 @@ public class EducationClp extends BaseModelImpl<Education> implements Education 
 	private String _userUuid;
 	private String _schoolName;
 	private long _degreeId;
-	private long _majorId;
 	private String _graduateYear;
+	private String _recommender;
+	private String _introduction;
 	private BaseModel<?> _educationRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.sample.service.ClpSerializer.class;
 }

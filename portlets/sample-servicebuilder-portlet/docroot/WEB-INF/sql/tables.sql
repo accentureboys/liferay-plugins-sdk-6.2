@@ -8,15 +8,14 @@ create table Sample_Education (
 	userId LONG,
 	schoolName VARCHAR(75) null,
 	degreeId LONG,
-	majorId LONG,
-	graduateYear VARCHAR(75) null
+	graduateYear VARCHAR(75) null,
+	recommender VARCHAR(75) null,
+	introduction VARCHAR(75) null
 );
 
 create table Sample_Honour (
 	honourId LONG not null primary key,
 	honoraryName VARCHAR(75) null,
-	recommender VARCHAR(75) null,
-	introduction VARCHAR(75) null,
 	userId LONG
 );
 

@@ -24,8 +24,6 @@ import com.liferay.sample.service.EducationLocalServiceUtil;
 import com.liferay.sample.service.EducationServiceUtil;
 import com.liferay.sample.service.HonourLocalServiceUtil;
 import com.liferay.sample.service.HonourServiceUtil;
-import com.liferay.sample.service.MajorLocalServiceUtil;
-import com.liferay.sample.service.MajorServiceUtil;
 import com.liferay.sample.service.PropertyLocalServiceUtil;
 import com.liferay.sample.service.PropertyServiceUtil;
 import com.liferay.sample.service.ThesisLocalServiceUtil;
@@ -55,9 +53,6 @@ public class ClpMessageListener extends BaseMessageListener {
 			HonourLocalServiceUtil.clearService();
 
 			HonourServiceUtil.clearService();
-			MajorLocalServiceUtil.clearService();
-
-			MajorServiceUtil.clearService();
 			PropertyLocalServiceUtil.clearService();
 
 			PropertyServiceUtil.clearService();

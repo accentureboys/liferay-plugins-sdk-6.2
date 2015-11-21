@@ -113,6 +113,10 @@ public class PropertyLocalServiceClp implements PropertyLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getPropertyListByUserId";
+
+		_methodParameterTypes19 = new String[] { "long" };
 	}
 
 	@Override
@@ -661,6 +665,30 @@ public class PropertyLocalServiceClp implements PropertyLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.util.List<com.liferay.sample.model.Property> getPropertyListByUserId(
+		long userId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { userId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.sample.model.Property>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -698,4 +726,6 @@ public class PropertyLocalServiceClp implements PropertyLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
 }

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
@@ -80,6 +82,223 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(EducationModelImpl.ENTITY_CACHE_ENABLED,
 			EducationModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_USERID = new FinderPath(EducationModelImpl.ENTITY_CACHE_ENABLED,
+			EducationModelImpl.FINDER_CACHE_ENABLED, EducationImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByuserId",
+			new String[] { Long.class.getName() },
+			EducationModelImpl.USERID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(EducationModelImpl.ENTITY_CACHE_ENABLED,
+			EducationModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByuserId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns the education where userId = &#63; or throws a {@link com.liferay.sample.NoSuchEducationException} if it could not be found.
+	 *
+	 * @param userId the user ID
+	 * @return the matching education
+	 * @throws com.liferay.sample.NoSuchEducationException if a matching education could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Education findByuserId(long userId)
+		throws NoSuchEducationException, SystemException {
+		Education education = fetchByuserId(userId);
+
+		if (education == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEducationException(msg.toString());
+		}
+
+		return education;
+	}
+
+	/**
+	 * Returns the education where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @return the matching education, or <code>null</code> if a matching education could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Education fetchByuserId(long userId) throws SystemException {
+		return fetchByuserId(userId, true);
+	}
+
+	/**
+	 * Returns the education where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching education, or <code>null</code> if a matching education could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Education fetchByuserId(long userId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { userId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_USERID,
+					finderArgs, this);
+		}
+
+		if (result instanceof Education) {
+			Education education = (Education)result;
+
+			if ((userId != education.getUserId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_EDUCATION_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				List<Education> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"EducationPersistenceImpl.fetchByuserId(long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					Education education = list.get(0);
+
+					result = education;
+
+					cacheResult(education);
+
+					if ((education.getUserId() != userId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
+							finderArgs, education);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Education)result;
+		}
+	}
+
+	/**
+	 * Removes the education where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @return the education that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Education removeByuserId(long userId)
+		throws NoSuchEducationException, SystemException {
+		Education education = findByuserId(userId);
+
+		return remove(education);
+	}
+
+	/**
+	 * Returns the number of educations where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching educations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByuserId(long userId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
+
+		Object[] finderArgs = new Object[] { userId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_EDUCATION_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "education.userId = ?";
 
 	public EducationPersistenceImpl() {
 		setModelClass(Education.class);
@@ -94,6 +313,9 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 	public void cacheResult(Education education) {
 		EntityCacheUtil.putResult(EducationModelImpl.ENTITY_CACHE_ENABLED,
 			EducationImpl.class, education.getPrimaryKey(), education);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
+			new Object[] { education.getUserId() }, education);
 
 		education.resetOriginalValues();
 	}
@@ -151,6 +373,8 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(education);
 	}
 
 	@Override
@@ -161,6 +385,49 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 		for (Education education : educations) {
 			EntityCacheUtil.removeResult(EducationModelImpl.ENTITY_CACHE_ENABLED,
 				EducationImpl.class, education.getPrimaryKey());
+
+			clearUniqueFindersCache(education);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(Education education) {
+		if (education.isNew()) {
+			Object[] args = new Object[] { education.getUserId() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID, args,
+				education);
+		}
+		else {
+			EducationModelImpl educationModelImpl = (EducationModelImpl)education;
+
+			if ((educationModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_USERID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { education.getUserId() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID, args,
+					education);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(Education education) {
+		EducationModelImpl educationModelImpl = (EducationModelImpl)education;
+
+		Object[] args = new Object[] { education.getUserId() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID, args);
+
+		if ((educationModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_USERID.getColumnBitmask()) != 0) {
+			args = new Object[] { educationModelImpl.getOriginalUserId() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID, args);
 		}
 	}
 
@@ -298,12 +565,15 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !EducationModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		EntityCacheUtil.putResult(EducationModelImpl.ENTITY_CACHE_ENABLED,
 			EducationImpl.class, education.getPrimaryKey(), education);
+
+		clearUniqueFindersCache(education);
+		cacheUniqueFindersCache(education);
 
 		return education;
 	}
@@ -322,8 +592,9 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 		educationImpl.setUserId(education.getUserId());
 		educationImpl.setSchoolName(education.getSchoolName());
 		educationImpl.setDegreeId(education.getDegreeId());
-		educationImpl.setMajorId(education.getMajorId());
 		educationImpl.setGraduateYear(education.getGraduateYear());
+		educationImpl.setRecommender(education.getRecommender());
+		educationImpl.setIntroduction(education.getIntroduction());
 
 		return educationImpl;
 	}
@@ -634,9 +905,12 @@ public class EducationPersistenceImpl extends BasePersistenceImpl<Education>
 	}
 
 	private static final String _SQL_SELECT_EDUCATION = "SELECT education FROM Education education";
+	private static final String _SQL_SELECT_EDUCATION_WHERE = "SELECT education FROM Education education WHERE ";
 	private static final String _SQL_COUNT_EDUCATION = "SELECT COUNT(education) FROM Education education";
+	private static final String _SQL_COUNT_EDUCATION_WHERE = "SELECT COUNT(education) FROM Education education WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "education.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Education exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Education exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(EducationPersistenceImpl.class);

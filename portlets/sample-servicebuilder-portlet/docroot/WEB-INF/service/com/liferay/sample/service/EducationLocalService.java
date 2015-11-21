@@ -249,4 +249,13 @@ public interface EducationLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	/**
+	* Get education object by userId
+	*
+	* @param userId the user id
+	* @return Education object
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.sample.model.Education getEducationByUserId(long userId);
 }

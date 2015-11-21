@@ -27,7 +27,6 @@ import com.liferay.sample.service.HonourService;
 import com.liferay.sample.service.persistence.DegreePersistence;
 import com.liferay.sample.service.persistence.EducationPersistence;
 import com.liferay.sample.service.persistence.HonourPersistence;
-import com.liferay.sample.service.persistence.MajorPersistence;
 import com.liferay.sample.service.persistence.PropertyPersistence;
 import com.liferay.sample.service.persistence.ThesisPersistence;
 
@@ -220,62 +219,6 @@ public abstract class HonourServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setHonourPersistence(HonourPersistence honourPersistence) {
 		this.honourPersistence = honourPersistence;
-	}
-
-	/**
-	 * Returns the major local service.
-	 *
-	 * @return the major local service
-	 */
-	public com.liferay.sample.service.MajorLocalService getMajorLocalService() {
-		return majorLocalService;
-	}
-
-	/**
-	 * Sets the major local service.
-	 *
-	 * @param majorLocalService the major local service
-	 */
-	public void setMajorLocalService(
-		com.liferay.sample.service.MajorLocalService majorLocalService) {
-		this.majorLocalService = majorLocalService;
-	}
-
-	/**
-	 * Returns the major remote service.
-	 *
-	 * @return the major remote service
-	 */
-	public com.liferay.sample.service.MajorService getMajorService() {
-		return majorService;
-	}
-
-	/**
-	 * Sets the major remote service.
-	 *
-	 * @param majorService the major remote service
-	 */
-	public void setMajorService(
-		com.liferay.sample.service.MajorService majorService) {
-		this.majorService = majorService;
-	}
-
-	/**
-	 * Returns the major persistence.
-	 *
-	 * @return the major persistence
-	 */
-	public MajorPersistence getMajorPersistence() {
-		return majorPersistence;
-	}
-
-	/**
-	 * Sets the major persistence.
-	 *
-	 * @param majorPersistence the major persistence
-	 */
-	public void setMajorPersistence(MajorPersistence majorPersistence) {
-		this.majorPersistence = majorPersistence;
 	}
 
 	/**
@@ -579,12 +522,6 @@ public abstract class HonourServiceBaseImpl extends BaseServiceImpl
 	protected com.liferay.sample.service.HonourService honourService;
 	@BeanReference(type = HonourPersistence.class)
 	protected HonourPersistence honourPersistence;
-	@BeanReference(type = com.liferay.sample.service.MajorLocalService.class)
-	protected com.liferay.sample.service.MajorLocalService majorLocalService;
-	@BeanReference(type = com.liferay.sample.service.MajorService.class)
-	protected com.liferay.sample.service.MajorService majorService;
-	@BeanReference(type = MajorPersistence.class)
-	protected MajorPersistence majorPersistence;
 	@BeanReference(type = com.liferay.sample.service.PropertyLocalService.class)
 	protected com.liferay.sample.service.PropertyLocalService propertyLocalService;
 	@BeanReference(type = com.liferay.sample.service.PropertyService.class)

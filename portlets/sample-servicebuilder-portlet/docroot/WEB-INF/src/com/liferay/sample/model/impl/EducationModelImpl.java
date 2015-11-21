@@ -69,10 +69,11 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 			{ "userId", Types.BIGINT },
 			{ "schoolName", Types.VARCHAR },
 			{ "degreeId", Types.BIGINT },
-			{ "majorId", Types.BIGINT },
-			{ "graduateYear", Types.VARCHAR }
+			{ "graduateYear", Types.VARCHAR },
+			{ "recommender", Types.VARCHAR },
+			{ "introduction", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Sample_Education (educationId LONG not null primary key,userId LONG,schoolName VARCHAR(75) null,degreeId LONG,majorId LONG,graduateYear VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Sample_Education (educationId LONG not null primary key,userId LONG,schoolName VARCHAR(75) null,degreeId LONG,graduateYear VARCHAR(75) null,recommender VARCHAR(75) null,introduction VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Sample_Education";
 	public static final String ORDER_BY_JPQL = " ORDER BY education.educationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Sample_Education.educationId ASC";
@@ -85,7 +86,11 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.liferay.sample.model.Education"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.liferay.sample.model.Education"),
+			true);
+	public static long USERID_COLUMN_BITMASK = 1L;
+	public static long EDUCATIONID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -104,8 +109,9 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 		model.setUserId(soapModel.getUserId());
 		model.setSchoolName(soapModel.getSchoolName());
 		model.setDegreeId(soapModel.getDegreeId());
-		model.setMajorId(soapModel.getMajorId());
 		model.setGraduateYear(soapModel.getGraduateYear());
+		model.setRecommender(soapModel.getRecommender());
+		model.setIntroduction(soapModel.getIntroduction());
 
 		return model;
 	}
@@ -174,8 +180,9 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 		attributes.put("userId", getUserId());
 		attributes.put("schoolName", getSchoolName());
 		attributes.put("degreeId", getDegreeId());
-		attributes.put("majorId", getMajorId());
 		attributes.put("graduateYear", getGraduateYear());
+		attributes.put("recommender", getRecommender());
+		attributes.put("introduction", getIntroduction());
 
 		return attributes;
 	}
@@ -206,16 +213,22 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 			setDegreeId(degreeId);
 		}
 
-		Long majorId = (Long)attributes.get("majorId");
-
-		if (majorId != null) {
-			setMajorId(majorId);
-		}
-
 		String graduateYear = (String)attributes.get("graduateYear");
 
 		if (graduateYear != null) {
 			setGraduateYear(graduateYear);
+		}
+
+		String recommender = (String)attributes.get("recommender");
+
+		if (recommender != null) {
+			setRecommender(recommender);
+		}
+
+		String introduction = (String)attributes.get("introduction");
+
+		if (introduction != null) {
+			setIntroduction(introduction);
 		}
 	}
 
@@ -238,6 +251,14 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -249,6 +270,10 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -280,17 +305,6 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 
 	@JSON
 	@Override
-	public long getMajorId() {
-		return _majorId;
-	}
-
-	@Override
-	public void setMajorId(long majorId) {
-		_majorId = majorId;
-	}
-
-	@JSON
-	@Override
 	public String getGraduateYear() {
 		if (_graduateYear == null) {
 			return StringPool.BLANK;
@@ -303,6 +317,42 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 	@Override
 	public void setGraduateYear(String graduateYear) {
 		_graduateYear = graduateYear;
+	}
+
+	@JSON
+	@Override
+	public String getRecommender() {
+		if (_recommender == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _recommender;
+		}
+	}
+
+	@Override
+	public void setRecommender(String recommender) {
+		_recommender = recommender;
+	}
+
+	@JSON
+	@Override
+	public String getIntroduction() {
+		if (_introduction == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _introduction;
+		}
+	}
+
+	@Override
+	public void setIntroduction(String introduction) {
+		_introduction = introduction;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -336,8 +386,9 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 		educationImpl.setUserId(getUserId());
 		educationImpl.setSchoolName(getSchoolName());
 		educationImpl.setDegreeId(getDegreeId());
-		educationImpl.setMajorId(getMajorId());
 		educationImpl.setGraduateYear(getGraduateYear());
+		educationImpl.setRecommender(getRecommender());
+		educationImpl.setIntroduction(getIntroduction());
 
 		educationImpl.resetOriginalValues();
 
@@ -388,6 +439,13 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 
 	@Override
 	public void resetOriginalValues() {
+		EducationModelImpl educationModelImpl = this;
+
+		educationModelImpl._originalUserId = educationModelImpl._userId;
+
+		educationModelImpl._setOriginalUserId = false;
+
+		educationModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -408,8 +466,6 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 
 		educationCacheModel.degreeId = getDegreeId();
 
-		educationCacheModel.majorId = getMajorId();
-
 		educationCacheModel.graduateYear = getGraduateYear();
 
 		String graduateYear = educationCacheModel.graduateYear;
@@ -418,12 +474,28 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 			educationCacheModel.graduateYear = null;
 		}
 
+		educationCacheModel.recommender = getRecommender();
+
+		String recommender = educationCacheModel.recommender;
+
+		if ((recommender != null) && (recommender.length() == 0)) {
+			educationCacheModel.recommender = null;
+		}
+
+		educationCacheModel.introduction = getIntroduction();
+
+		String introduction = educationCacheModel.introduction;
+
+		if ((introduction != null) && (introduction.length() == 0)) {
+			educationCacheModel.introduction = null;
+		}
+
 		return educationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{educationId=");
 		sb.append(getEducationId());
@@ -433,10 +505,12 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 		sb.append(getSchoolName());
 		sb.append(", degreeId=");
 		sb.append(getDegreeId());
-		sb.append(", majorId=");
-		sb.append(getMajorId());
 		sb.append(", graduateYear=");
 		sb.append(getGraduateYear());
+		sb.append(", recommender=");
+		sb.append(getRecommender());
+		sb.append(", introduction=");
+		sb.append(getIntroduction());
 		sb.append("}");
 
 		return sb.toString();
@@ -444,7 +518,7 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.sample.model.Education");
@@ -467,12 +541,16 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 		sb.append(getDegreeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>majorId</column-name><column-value><![CDATA[");
-		sb.append(getMajorId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>graduateYear</column-name><column-value><![CDATA[");
 		sb.append(getGraduateYear());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>recommender</column-name><column-value><![CDATA[");
+		sb.append(getRecommender());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>introduction</column-name><column-value><![CDATA[");
+		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -487,9 +565,13 @@ public class EducationModelImpl extends BaseModelImpl<Education>
 	private long _educationId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _schoolName;
 	private long _degreeId;
-	private long _majorId;
 	private String _graduateYear;
+	private String _recommender;
+	private String _introduction;
+	private long _columnBitmask;
 	private Education _escapedModel;
 }

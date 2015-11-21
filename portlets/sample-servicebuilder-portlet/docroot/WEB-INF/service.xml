@@ -8,32 +8,39 @@
         <column name="userId" type="long"></column>
         <column name="schoolName" type="String"></column>
         <column name="degreeId" type="long"></column>
-        <column name="majorId" type="long"></column>
         <column name="graduateYear" type="String"></column>
+        <column name="recommender" type="String"></column>
+        <column name="introduction" type="String"></column>
+        <finder name="userId" return-type="Education">
+            <finder-column name="userId"></finder-column>
+        </finder>
     </entity>
     <entity name="Degree" local-service="true">
         <column name="degreeId" type="long" primary="true"></column>
         <column name="degreeName" type="String"></column>
     </entity>
-    <entity local-service="true" name="Major">
-        <column name="majorId" type="long" primary="true"></column>
-        <column name="majorName" type="String"></column>
-    </entity>
     <entity name="Honour" local-service="true">
         <column name="honourId" type="long" primary="true"></column>
         <column name="honoraryName" type="String"></column>
-        <column name="recommender" type="String"></column>
-        <column name="introduction" type="String"></column>
         <column name="userId" type="long"></column>
+        <finder name="userId" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+        </finder>
     </entity>
     <entity name="Thesis" local-service="true">
         <column name="thesisId" primary="true" type="long"></column>
         <column name="thesisName" type="String"></column>
         <column name="userId" type="long"></column>
+        <finder name="userId" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+        </finder>
     </entity>
     <entity name="Property" local-service="true">
         <column name="propertyId" type="long" primary="true"></column>
         <column name="propertyName" type="String"></column>
         <column name="userId" type="long"></column>
+        <finder name="userId" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+        </finder>
     </entity>
 </service-builder>

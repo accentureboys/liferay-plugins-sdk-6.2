@@ -109,6 +109,165 @@ public class ThesisUtil {
 	}
 
 	/**
+	* Returns all the thesises where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching thesises
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.sample.model.Thesis> findByuserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByuserId(userId);
+	}
+
+	/**
+	* Returns a range of all the thesises where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.sample.model.impl.ThesisModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of thesises
+	* @param end the upper bound of the range of thesises (not inclusive)
+	* @return the range of matching thesises
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.sample.model.Thesis> findByuserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByuserId(userId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the thesises where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.sample.model.impl.ThesisModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of thesises
+	* @param end the upper bound of the range of thesises (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching thesises
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.sample.model.Thesis> findByuserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByuserId(userId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first thesis in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching thesis
+	* @throws com.liferay.sample.NoSuchThesisException if a matching thesis could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Thesis findByuserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchThesisException {
+		return getPersistence().findByuserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the first thesis in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching thesis, or <code>null</code> if a matching thesis could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Thesis fetchByuserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByuserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last thesis in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching thesis
+	* @throws com.liferay.sample.NoSuchThesisException if a matching thesis could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Thesis findByuserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchThesisException {
+		return getPersistence().findByuserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last thesis in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching thesis, or <code>null</code> if a matching thesis could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Thesis fetchByuserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByuserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the thesises before and after the current thesis in the ordered set where userId = &#63;.
+	*
+	* @param thesisId the primary key of the current thesis
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next thesis
+	* @throws com.liferay.sample.NoSuchThesisException if a thesis with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.sample.model.Thesis[] findByuserId_PrevAndNext(
+		long thesisId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.sample.NoSuchThesisException {
+		return getPersistence()
+				   .findByuserId_PrevAndNext(thesisId, userId, orderByComparator);
+	}
+
+	/**
+	* Removes all the thesises where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByuserId(userId);
+	}
+
+	/**
+	* Returns the number of thesises where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching thesises
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByuserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByuserId(userId);
+	}
+
+	/**
 	* Caches the thesis in the entity cache if it is enabled.
 	*
 	* @param thesis the thesis

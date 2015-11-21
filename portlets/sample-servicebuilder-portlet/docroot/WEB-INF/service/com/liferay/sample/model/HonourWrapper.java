@@ -50,8 +50,6 @@ public class HonourWrapper implements Honour, ModelWrapper<Honour> {
 
 		attributes.put("honourId", getHonourId());
 		attributes.put("honoraryName", getHonoraryName());
-		attributes.put("recommender", getRecommender());
-		attributes.put("introduction", getIntroduction());
 		attributes.put("userId", getUserId());
 
 		return attributes;
@@ -69,18 +67,6 @@ public class HonourWrapper implements Honour, ModelWrapper<Honour> {
 
 		if (honoraryName != null) {
 			setHonoraryName(honoraryName);
-		}
-
-		String recommender = (String)attributes.get("recommender");
-
-		if (recommender != null) {
-			setRecommender(recommender);
-		}
-
-		String introduction = (String)attributes.get("introduction");
-
-		if (introduction != null) {
-			setIntroduction(introduction);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -148,46 +134,6 @@ public class HonourWrapper implements Honour, ModelWrapper<Honour> {
 	@Override
 	public void setHonoraryName(java.lang.String honoraryName) {
 		_honour.setHonoraryName(honoraryName);
-	}
-
-	/**
-	* Returns the recommender of this honour.
-	*
-	* @return the recommender of this honour
-	*/
-	@Override
-	public java.lang.String getRecommender() {
-		return _honour.getRecommender();
-	}
-
-	/**
-	* Sets the recommender of this honour.
-	*
-	* @param recommender the recommender of this honour
-	*/
-	@Override
-	public void setRecommender(java.lang.String recommender) {
-		_honour.setRecommender(recommender);
-	}
-
-	/**
-	* Returns the introduction of this honour.
-	*
-	* @return the introduction of this honour
-	*/
-	@Override
-	public java.lang.String getIntroduction() {
-		return _honour.getIntroduction();
-	}
-
-	/**
-	* Sets the introduction of this honour.
-	*
-	* @param introduction the introduction of this honour
-	*/
-	@Override
-	public void setIntroduction(java.lang.String introduction) {
-		_honour.setIntroduction(introduction);
 	}
 
 	/**

@@ -32,8 +32,6 @@ public class HonourSoap implements Serializable {
 
 		soapModel.setHonourId(model.getHonourId());
 		soapModel.setHonoraryName(model.getHonoraryName());
-		soapModel.setRecommender(model.getRecommender());
-		soapModel.setIntroduction(model.getIntroduction());
 		soapModel.setUserId(model.getUserId());
 
 		return soapModel;
@@ -103,22 +101,6 @@ public class HonourSoap implements Serializable {
 		_honoraryName = honoraryName;
 	}
 
-	public String getRecommender() {
-		return _recommender;
-	}
-
-	public void setRecommender(String recommender) {
-		_recommender = recommender;
-	}
-
-	public String getIntroduction() {
-		return _introduction;
-	}
-
-	public void setIntroduction(String introduction) {
-		_introduction = introduction;
-	}
-
 	public long getUserId() {
 		return _userId;
 	}
@@ -129,7 +111,5 @@ public class HonourSoap implements Serializable {
 
 	private long _honourId;
 	private String _honoraryName;
-	private String _recommender;
-	private String _introduction;
 	private long _userId;
 }

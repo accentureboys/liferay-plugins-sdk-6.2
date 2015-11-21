@@ -271,6 +271,17 @@ public class HonourLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	/**
+	* Get honour list by user id
+	*
+	* @param userId the user id
+	* @return Honour list
+	*/
+	public static java.util.List<com.liferay.sample.model.Honour> getHonourListByUserId(
+		long userId) {
+		return getService().getHonourListByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

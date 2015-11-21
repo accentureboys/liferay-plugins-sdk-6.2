@@ -36,7 +36,7 @@ public class EducationCacheModel implements CacheModel<Education>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{educationId=");
 		sb.append(educationId);
@@ -46,10 +46,12 @@ public class EducationCacheModel implements CacheModel<Education>,
 		sb.append(schoolName);
 		sb.append(", degreeId=");
 		sb.append(degreeId);
-		sb.append(", majorId=");
-		sb.append(majorId);
 		sb.append(", graduateYear=");
 		sb.append(graduateYear);
+		sb.append(", recommender=");
+		sb.append(recommender);
+		sb.append(", introduction=");
+		sb.append(introduction);
 		sb.append("}");
 
 		return sb.toString();
@@ -70,13 +72,26 @@ public class EducationCacheModel implements CacheModel<Education>,
 		}
 
 		educationImpl.setDegreeId(degreeId);
-		educationImpl.setMajorId(majorId);
 
 		if (graduateYear == null) {
 			educationImpl.setGraduateYear(StringPool.BLANK);
 		}
 		else {
 			educationImpl.setGraduateYear(graduateYear);
+		}
+
+		if (recommender == null) {
+			educationImpl.setRecommender(StringPool.BLANK);
+		}
+		else {
+			educationImpl.setRecommender(recommender);
+		}
+
+		if (introduction == null) {
+			educationImpl.setIntroduction(StringPool.BLANK);
+		}
+		else {
+			educationImpl.setIntroduction(introduction);
 		}
 
 		educationImpl.resetOriginalValues();
@@ -90,8 +105,9 @@ public class EducationCacheModel implements CacheModel<Education>,
 		userId = objectInput.readLong();
 		schoolName = objectInput.readUTF();
 		degreeId = objectInput.readLong();
-		majorId = objectInput.readLong();
 		graduateYear = objectInput.readUTF();
+		recommender = objectInput.readUTF();
+		introduction = objectInput.readUTF();
 	}
 
 	@Override
@@ -108,7 +124,6 @@ public class EducationCacheModel implements CacheModel<Education>,
 		}
 
 		objectOutput.writeLong(degreeId);
-		objectOutput.writeLong(majorId);
 
 		if (graduateYear == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -116,12 +131,27 @@ public class EducationCacheModel implements CacheModel<Education>,
 		else {
 			objectOutput.writeUTF(graduateYear);
 		}
+
+		if (recommender == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(recommender);
+		}
+
+		if (introduction == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(introduction);
+		}
 	}
 
 	public long educationId;
 	public long userId;
 	public String schoolName;
 	public long degreeId;
-	public long majorId;
 	public String graduateYear;
+	public String recommender;
+	public String introduction;
 }

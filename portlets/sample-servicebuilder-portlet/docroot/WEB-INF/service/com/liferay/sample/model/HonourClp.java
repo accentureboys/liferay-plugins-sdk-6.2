@@ -75,8 +75,6 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 
 		attributes.put("honourId", getHonourId());
 		attributes.put("honoraryName", getHonoraryName());
-		attributes.put("recommender", getRecommender());
-		attributes.put("introduction", getIntroduction());
 		attributes.put("userId", getUserId());
 
 		return attributes;
@@ -94,18 +92,6 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 
 		if (honoraryName != null) {
 			setHonoraryName(honoraryName);
-		}
-
-		String recommender = (String)attributes.get("recommender");
-
-		if (recommender != null) {
-			setRecommender(recommender);
-		}
-
-		String introduction = (String)attributes.get("introduction");
-
-		if (introduction != null) {
-			setIntroduction(introduction);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -154,52 +140,6 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 				Method method = clazz.getMethod("setHonoraryName", String.class);
 
 				method.invoke(_honourRemoteModel, honoraryName);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getRecommender() {
-		return _recommender;
-	}
-
-	@Override
-	public void setRecommender(String recommender) {
-		_recommender = recommender;
-
-		if (_honourRemoteModel != null) {
-			try {
-				Class<?> clazz = _honourRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setRecommender", String.class);
-
-				method.invoke(_honourRemoteModel, recommender);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getIntroduction() {
-		return _introduction;
-	}
-
-	@Override
-	public void setIntroduction(String introduction) {
-		_introduction = introduction;
-
-		if (_honourRemoteModel != null) {
-			try {
-				Class<?> clazz = _honourRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setIntroduction", String.class);
-
-				method.invoke(_honourRemoteModel, introduction);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -311,8 +251,6 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 
 		clone.setHonourId(getHonourId());
 		clone.setHonoraryName(getHonoraryName());
-		clone.setRecommender(getRecommender());
-		clone.setIntroduction(getIntroduction());
 		clone.setUserId(getUserId());
 
 		return clone;
@@ -366,16 +304,12 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("{honourId=");
 		sb.append(getHonourId());
 		sb.append(", honoraryName=");
 		sb.append(getHonoraryName());
-		sb.append(", recommender=");
-		sb.append(getRecommender());
-		sb.append(", introduction=");
-		sb.append(getIntroduction());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append("}");
@@ -385,7 +319,7 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.sample.model.Honour");
@@ -400,14 +334,6 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 		sb.append(getHonoraryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>recommender</column-name><column-value><![CDATA[");
-		sb.append(getRecommender());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>introduction</column-name><column-value><![CDATA[");
-		sb.append(getIntroduction());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
@@ -419,8 +345,6 @@ public class HonourClp extends BaseModelImpl<Honour> implements Honour {
 
 	private long _honourId;
 	private String _honoraryName;
-	private String _recommender;
-	private String _introduction;
 	private long _userId;
 	private String _userUuid;
 	private BaseModel<?> _honourRemoteModel;

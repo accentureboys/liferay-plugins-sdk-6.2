@@ -5,7 +5,6 @@
 	<import class="com.liferay.sample.model.Degree" />
 	<import class="com.liferay.sample.model.Education" />
 	<import class="com.liferay.sample.model.Honour" />
-	<import class="com.liferay.sample.model.Major" />
 	<import class="com.liferay.sample.model.Property" />
 	<import class="com.liferay.sample.model.Thesis" />
 	<class name="com.liferay.sample.model.impl.DegreeImpl" table="Sample_Degree">
@@ -23,8 +22,9 @@
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="schoolName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="degreeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="majorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="graduateYear" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="recommender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="introduction" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.sample.model.impl.HonourImpl" table="Sample_Honour">
 		<cache usage="read-write" />
@@ -32,16 +32,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="honoraryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="recommender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="introduction" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="com.liferay.sample.model.impl.MajorImpl" table="Sample_Major">
-		<cache usage="read-write" />
-		<id name="majorId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="majorName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.sample.model.impl.PropertyImpl" table="Sample_Property">
 		<cache usage="read-write" />
