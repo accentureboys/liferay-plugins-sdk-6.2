@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@include file="/html/init.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -5,6 +6,16 @@
 
 <% 
 	List<com.liferay.sample.model.Degree> allDegrees = DegreeLocalServiceUtil.getAllDegrees();
+	User selUser = PortalUtil.getSelectedUser(request);
+	selUser = PortalUtil.getUser(request);
+	Education education = null;
+	education = EducationLocalServiceUtil.getEducationByUserId(selUser.getUserId());
+	int year = 0;
+	long degreeId = 0l;
+	if(education!=null){
+		year = Integer.parseInt(education.getGraduateYear());
+		degreeId = education.getDegreeId();
+	}
 %>
 
 <script>  
@@ -104,11 +115,14 @@ return false;
 <aui:form  action="${updateUserBackground}" method="POST">      
 
 <aui:fieldset label="学历资料">
-	<aui:input name="schoolName" type="text" label="毕业大学"></aui:input>
+	毕业大学:
+	<liferay-ui:input-field model="<%= Education.class %>" bean="<%= education %>" field="schoolName" />
 	<aui:select name="degree" label="学历">
 		<aui:option label="请选择" value="0" />
+		<c:set var="dId" value="<%=degreeId %>"/>
 		<c:forEach var="degree" items='<%=allDegrees%>'>
-			<aui:option label="${degree.degreeName}" value="${degree.degreeId}" />
+			<option value="${degree.degreeId}" ${degree.degreeId == dId ? 'selected="selected"' : ''}>${degree.degreeName}
+			</option>
 		</c:forEach>
 	</aui:select>
 	<aui:select name="graduateYear" cssClass="graduateSelect" label="毕业年份" >
@@ -117,7 +131,7 @@ return false;
 					int now = c.get(Calendar.YEAR);
 					now -= 40;
 					for (int i = 0; i < 42; i++) {
-						out.println("<option value=" + now + ">" + now
+						out.println("<option value='" + now +"' "+ (year==now?"selected='selected'":"") + ">" + now
 								+ "</option>");
 						now++;
 					}
@@ -156,9 +170,10 @@ return false;
     </div>
 </div>
 
-<aui:input name="recommender" type="text" label="推荐人"></aui:input>
-<label class="" for="">更多介绍</label>
-<textarea name="<portlet:namespace/>introduction" rows="4" cols="20" wrap="hard"></textarea>
+推荐人:
+<liferay-ui:input-field model="<%= Education.class %>" bean="<%= education %>" field="recommender" />
+更多介绍:
+<liferay-ui:input-field model="<%= Education.class %>" bean="<%= education %>" field="introduction" />
 </aui:fieldset>
 
 <aui:button-row>

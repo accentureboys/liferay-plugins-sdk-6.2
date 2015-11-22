@@ -27,8 +27,14 @@
 <%@ page import="com.liferay.portal.service.RegionServiceUtil"%>
 <%@ page import="com.liferay.sample.model.Degree"%>
 <%@ page import="com.liferay.sample.service.DegreeLocalServiceUtil"%>
-<%@ page import="com.liferay.sample.model.Major"%>
-<%@ page import="com.liferay.sample.service.MajorLocalServiceUtil"%>
+<%@ page import="com.liferay.sample.model.Education"%>
+<%@ page import="com.liferay.sample.service.EducationLocalServiceUtil"%>
+<%@ page import="com.liferay.sample.model.Property"%>
+<%@ page import="com.liferay.sample.service.PropertyLocalServiceUtil"%>
+<%@ page import="com.liferay.sample.model.Honour"%>
+<%@ page import="com.liferay.sample.service.HonourLocalServiceUtil"%>
+<%@ page import="com.liferay.sample.model.Thesis"%>
+<%@ page import="com.liferay.sample.service.ThesisLocalServiceUtil"%>
 
 <%@ page import="javax.portlet.WindowState" %>
 <link href="${pageContext.request.contextPath}/css/amazeui.min.css" rel="stylesheet">

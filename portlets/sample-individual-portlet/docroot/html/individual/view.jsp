@@ -39,7 +39,6 @@
 	<aui:form  action="${updateUser}" method="POST">
 	<aui:fieldset>
 		<aui:select id="countrySelector" name="countryId" label="国家" cssClass="countrySelect" onchange="changeRegions(this.value);">
-			<%-- <aui:option label="<%= countryName %>" value="<%= countryId  %>" /> --%>
 			<c:set var="cId" value="<%=countryId %>"/>
 			<c:forEach var="country" items='<%=allCountries%>'>
 				<option value="${country.countryId}" ${country.countryId == cId ? 'selected="selected"' : ''}>${country.name}
