@@ -9,6 +9,7 @@ import javax.portlet.ActionResponse;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
@@ -63,4 +64,67 @@ public class IndividualPortlet extends MVCPortlet {
 
 		response.setRenderParameter("mvcPath", "/html/individual/individual.jsp");
 	}
+	
+	public void getAutoFieldsData(ActionRequest actionRequest,
+			ActionResponse response) throws Exception {
+		// get honor values from page
+		System.out.println("=============getAutoFieldsData==");
+		String honourIndexesString = actionRequest
+				.getParameter("honourIndexes");
+		System.out.println("=============honourIndexesString=="
+				+ honourIndexesString);
+		int[] honourIndexes = StringUtil.split(honourIndexesString, 0);
+
+		for (int honourIndex : honourIndexes) {
+			String honoraryName = ParamUtil.getString(actionRequest,
+					"honoraryName" + honourIndex);
+			System.out.println("=============honoraryName==" + honoraryName);
+			/*
+			 * int typeId = ParamUtil.getInteger(actionRequest, "phoneTypeId" +
+			 * phonesIndex); System.out.println("=============typeId==" +
+			 * typeId);
+			 */
+
+		}
+		// get property values from page
+		System.out.println("=============getAutoFieldsData==");
+		String propertyIndexesString = actionRequest
+				.getParameter("propertyIndexes");
+		System.out.println("=============propertyIndexesString=="
+				+ propertyIndexesString);
+		int[] propertyIndexes = StringUtil.split(propertyIndexesString, 0);
+
+		for (int propertyIndex : propertyIndexes) {
+			String propertyName = ParamUtil.getString(actionRequest,
+					"propertyName" + propertyIndex);
+			System.out.println("=============propertyName==" + propertyName);
+			/*
+			 * int typeId = ParamUtil.getInteger(actionRequest, "phoneTypeId" +
+			 * phonesIndex); System.out.println("=============typeId==" +
+			 * typeId);
+			 */
+
+		}
+		// get thesis values from page
+		System.out.println("=============getAutoFieldsData==");
+		String thesisIndexesString = actionRequest
+				.getParameter("thesisIndexes");
+		System.out.println("=============thesisIndexesString=="
+				+ thesisIndexesString);
+		int[] thesisIndexes = StringUtil.split(thesisIndexesString, 0);
+
+		for (int thesisIndex : thesisIndexes) {
+			String thesisName = ParamUtil.getString(actionRequest,
+					"thesisName" + thesisIndex);
+			System.out.println("=============thesisName==" + thesisName);
+			/*
+			 * int typeId = ParamUtil.getInteger(actionRequest, "phoneTypeId" +
+			 * phonesIndex); System.out.println("=============typeId==" +
+			 * typeId);
+			 */
+
+		}
+	}
+	
+	
 }
