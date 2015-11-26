@@ -285,6 +285,17 @@ public class PropertyLocalServiceUtil {
 		return getService().getPropertyListByUserId(userId);
 	}
 
+	/**
+	* Remove property list by user id
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	public static void removePropertyListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().removePropertyListByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

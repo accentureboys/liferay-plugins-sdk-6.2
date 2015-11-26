@@ -259,4 +259,13 @@ public interface PropertyLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.sample.model.Property> getPropertyListByUserId(
 		long userId);
+
+	/**
+	* Remove property list by user id
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	public void removePropertyListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -111,6 +111,10 @@ public class ThesisLocalServiceClpInvoker {
 		_methodName64 = "getThesisListByUserId";
 
 		_methodParameterTypes64 = new String[] { "long" };
+
+		_methodName65 = "removeThesisListByUserId";
+
+		_methodParameterTypes65 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -219,6 +223,13 @@ public class ThesisLocalServiceClpInvoker {
 			return ThesisLocalServiceUtil.getThesisListByUserId(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			ThesisLocalServiceUtil.removeThesisListByUserId(((Long)arguments[0]).longValue());
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -260,4 +271,6 @@ public class ThesisLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 }

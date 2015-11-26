@@ -282,6 +282,17 @@ public class HonourLocalServiceUtil {
 		return getService().getHonourListByUserId(userId);
 	}
 
+	/**
+	* Remove honour list by user id
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	public static void removeHonourListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().removeHonourListByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

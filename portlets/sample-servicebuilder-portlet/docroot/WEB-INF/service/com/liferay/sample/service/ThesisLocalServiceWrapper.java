@@ -293,6 +293,18 @@ public class ThesisLocalServiceWrapper implements ThesisLocalService,
 	}
 
 	/**
+	* Remove thesis list by userId
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	@Override
+	public void removeThesisListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_thesisLocalService.removeThesisListByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public ThesisLocalService getWrappedThesisLocalService() {

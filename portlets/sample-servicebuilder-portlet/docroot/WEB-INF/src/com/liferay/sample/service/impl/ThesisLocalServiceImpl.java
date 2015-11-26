@@ -55,4 +55,14 @@ public class ThesisLocalServiceImpl extends ThesisLocalServiceBaseImpl {
 			return null;
 		}
 	}
+	
+	/**
+	 * Remove thesis list by userId
+	 * 
+	 * @param userId long userId
+	 * @throws SystemException
+	 */
+	public void removeThesisListByUserId(long userId) throws SystemException {
+		thesisPersistence.removeByuserId(userId);
+	}
 }

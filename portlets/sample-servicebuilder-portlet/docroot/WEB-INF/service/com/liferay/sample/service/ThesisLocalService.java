@@ -259,4 +259,13 @@ public interface ThesisLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.sample.model.Thesis> getThesisListByUserId(
 		long userId);
+
+	/**
+	* Remove thesis list by userId
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	public void removeThesisListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

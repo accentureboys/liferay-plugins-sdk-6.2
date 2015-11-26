@@ -259,4 +259,13 @@ public interface HonourLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.sample.model.Honour> getHonourListByUserId(
 		long userId);
+
+	/**
+	* Remove honour list by user id
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	public void removeHonourListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

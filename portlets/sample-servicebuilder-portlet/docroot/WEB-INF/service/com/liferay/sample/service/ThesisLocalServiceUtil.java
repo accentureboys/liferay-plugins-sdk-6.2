@@ -282,6 +282,17 @@ public class ThesisLocalServiceUtil {
 		return getService().getThesisListByUserId(userId);
 	}
 
+	/**
+	* Remove thesis list by userId
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	public static void removeThesisListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().removeThesisListByUserId(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

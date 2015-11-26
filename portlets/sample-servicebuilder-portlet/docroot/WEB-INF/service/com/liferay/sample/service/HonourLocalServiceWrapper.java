@@ -293,6 +293,18 @@ public class HonourLocalServiceWrapper implements HonourLocalService,
 	}
 
 	/**
+	* Remove honour list by user id
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	@Override
+	public void removeHonourListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_honourLocalService.removeHonourListByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public HonourLocalService getWrappedHonourLocalService() {

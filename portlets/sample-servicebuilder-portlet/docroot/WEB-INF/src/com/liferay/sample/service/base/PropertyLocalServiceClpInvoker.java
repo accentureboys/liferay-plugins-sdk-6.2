@@ -117,6 +117,10 @@ public class PropertyLocalServiceClpInvoker {
 		_methodName64 = "getPropertyListByUserId";
 
 		_methodParameterTypes64 = new String[] { "long" };
+
+		_methodName65 = "removePropertyListByUserId";
+
+		_methodParameterTypes65 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -225,6 +229,13 @@ public class PropertyLocalServiceClpInvoker {
 			return PropertyLocalServiceUtil.getPropertyListByUserId(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
+			PropertyLocalServiceUtil.removePropertyListByUserId(((Long)arguments[0]).longValue());
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -266,4 +277,6 @@ public class PropertyLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName64;
 	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 }

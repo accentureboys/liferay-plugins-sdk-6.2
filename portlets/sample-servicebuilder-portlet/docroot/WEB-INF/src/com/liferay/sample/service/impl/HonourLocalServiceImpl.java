@@ -55,4 +55,14 @@ public class HonourLocalServiceImpl extends HonourLocalServiceBaseImpl {
 			return null;
 		}
 	}
+	
+	/**
+	 * Remove honour list by user id
+	 * 
+	 * @param userId long userId
+	 * @throws SystemException
+	 */
+	public void removeHonourListByUserId(long userId) throws SystemException{
+		honourPersistence.removeByuserId(userId);
+	}
 }

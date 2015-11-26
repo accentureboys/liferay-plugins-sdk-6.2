@@ -55,4 +55,14 @@ public class PropertyLocalServiceImpl extends PropertyLocalServiceBaseImpl {
 			return null;
 		}
 	}
+	
+	/**
+	 * Remove property list by user id
+	 * 
+	 * @param userId long userId
+	 * @throws SystemException
+	 */
+	public void removePropertyListByUserId(long userId) throws SystemException {
+		propertyPersistence.removeByuserId(userId);
+	}
 }

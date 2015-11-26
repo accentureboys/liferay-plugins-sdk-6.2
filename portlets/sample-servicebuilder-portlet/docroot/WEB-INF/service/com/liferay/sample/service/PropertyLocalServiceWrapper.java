@@ -295,6 +295,18 @@ public class PropertyLocalServiceWrapper implements PropertyLocalService,
 	}
 
 	/**
+	* Remove property list by user id
+	*
+	* @param userId long userId
+	* @throws SystemException
+	*/
+	@Override
+	public void removePropertyListByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_propertyLocalService.removePropertyListByUserId(userId);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public PropertyLocalService getWrappedPropertyLocalService() {
