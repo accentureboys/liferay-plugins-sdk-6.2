@@ -1,11 +1,13 @@
 package com.accentureboys.sample.individual;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -21,6 +23,16 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.sample.model.Education;
+import com.liferay.sample.model.Honour;
+import com.liferay.sample.model.Property;
+import com.liferay.sample.model.Thesis;
+import com.liferay.sample.service.EducationLocalServiceUtil;
+import com.liferay.sample.service.HonourLocalServiceUtil;
+import com.liferay.sample.service.HonourServiceUtil;
+import com.liferay.sample.service.PropertyLocalServiceUtil;
+import com.liferay.sample.service.ThesisLocalServiceUtil;
+import com.liferay.sample.service.persistence.HonourPersistence;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -65,66 +77,157 @@ public class IndividualPortlet extends MVCPortlet {
 		response.setRenderParameter("mvcPath", "/html/individual/individual.jsp");
 	}
 	
-	public void getAutoFieldsData(ActionRequest actionRequest,
-			ActionResponse response) throws Exception {
-		// get honor values from page
-		System.out.println("=============getAutoFieldsData==");
-		String honourIndexesString = actionRequest
-				.getParameter("honourIndexes");
-		System.out.println("=============honourIndexesString=="
-				+ honourIndexesString);
+	/**
+	 * Save Education, Honor, Property and Thesis information
+	 * 
+	 * @param actionRequest
+	 * @param response
+	 * @throws Exception
+	 */
+	public void getAutoFieldsData(ActionRequest actionRequest, ActionResponse response) throws Exception {
+		//get current login user
+		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		Company company = themeDisplay.getCompany();
+		User user = PortalUtil.getUser(actionRequest);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				User.class.getName(), actionRequest);
+		String schoolName = (String) serviceContext.getAttribute("schoolName");
+		String recommender = (String) serviceContext.getAttribute("recommender");
+		String introduction = (String) serviceContext.getAttribute("introduction");
+		String graduateYear = ParamUtil.getString(actionRequest, "graduateYear");
+		long degreeId = ParamUtil.getLong(actionRequest, "degree");
+		//get education object by userId if empty create a new education object
+		Education education = null;
+		education = EducationLocalServiceUtil.getEducationByUserId(user.getUserId());
+		if (education == null) {
+			long educationId = CounterLocalServiceUtil.increment(Education.class.getName());
+			education = EducationLocalServiceUtil.createEducation(educationId);
+			this.setEducation(education, user.getUserId(), schoolName, degreeId, graduateYear, recommender, introduction);
+		}else{
+			this.setEducation(education, user.getUserId(), schoolName, degreeId, graduateYear, recommender, introduction);
+		}
+		
+		// get honor values from database
+		List<Honour> honourList = new ArrayList<Honour>();
+		honourList = HonourLocalServiceUtil.getHonourListByUserId(user.getUserId());
+		if (honourList.size() != 0) {
+			HonourLocalServiceUtil.removeHonourListByUserId(user.getUserId());
+		}
+		// get honour auto fields data
+		String honourIndexesString = actionRequest.getParameter("honourIndexes");
 		int[] honourIndexes = StringUtil.split(honourIndexesString, 0);
-
 		for (int honourIndex : honourIndexes) {
-			String honoraryName = ParamUtil.getString(actionRequest,
-					"honoraryName" + honourIndex);
-			System.out.println("=============honoraryName==" + honoraryName);
-			/*
-			 * int typeId = ParamUtil.getInteger(actionRequest, "phoneTypeId" +
-			 * phonesIndex); System.out.println("=============typeId==" +
-			 * typeId);
-			 */
-
+			String honoraryName = ParamUtil.getString(actionRequest, "honoraryName" + honourIndex);
+			if (!honoraryName.equals("")) {
+				long honourId = CounterLocalServiceUtil.increment(Honour.class.getName());
+				Honour honour = HonourLocalServiceUtil.createHonour(honourId);
+				honour = this.updateHonor(honour, honoraryName, user.getUserId());
+				HonourLocalServiceUtil.addHonour(honour);
+			}
+		}
+		
+		// get property values from database
+		List<Property> propertyList = new ArrayList<Property>();
+		propertyList = PropertyLocalServiceUtil.getPropertyListByUserId(user.getUserId());
+		if (propertyList.size() != 0) {
+			PropertyLocalServiceUtil.removePropertyListByUserId(user.getUserId());
 		}
 		// get property values from page
-		System.out.println("=============getAutoFieldsData==");
-		String propertyIndexesString = actionRequest
-				.getParameter("propertyIndexes");
-		System.out.println("=============propertyIndexesString=="
-				+ propertyIndexesString);
+		String propertyIndexesString = actionRequest.getParameter("propertyIndexes");
 		int[] propertyIndexes = StringUtil.split(propertyIndexesString, 0);
-
 		for (int propertyIndex : propertyIndexes) {
-			String propertyName = ParamUtil.getString(actionRequest,
-					"propertyName" + propertyIndex);
-			System.out.println("=============propertyName==" + propertyName);
-			/*
-			 * int typeId = ParamUtil.getInteger(actionRequest, "phoneTypeId" +
-			 * phonesIndex); System.out.println("=============typeId==" +
-			 * typeId);
-			 */
-
+			String propertyName = ParamUtil.getString(actionRequest, "propertyName" + propertyIndex);
+			if (!propertyName.equals("")) {
+				long propertyId = CounterLocalServiceUtil.increment(Property.class.getName());
+				Property property = PropertyLocalServiceUtil.createProperty(propertyId);
+				property = this.updateProperty(property, propertyName, user.getUserId());
+				PropertyLocalServiceUtil.addProperty(property);
+			}	
+		}
+		
+		// get thesis values from database
+		List<Thesis> thesisList = new ArrayList<Thesis>();
+		thesisList = ThesisLocalServiceUtil.getThesisListByUserId(user.getUserId());
+		if (thesisList.size() != 0) {
+			ThesisLocalServiceUtil.removeThesisListByUserId(user.getUserId());
 		}
 		// get thesis values from page
-		System.out.println("=============getAutoFieldsData==");
-		String thesisIndexesString = actionRequest
-				.getParameter("thesisIndexes");
-		System.out.println("=============thesisIndexesString=="
-				+ thesisIndexesString);
+		String thesisIndexesString = actionRequest.getParameter("thesisIndexes");
 		int[] thesisIndexes = StringUtil.split(thesisIndexesString, 0);
-
 		for (int thesisIndex : thesisIndexes) {
-			String thesisName = ParamUtil.getString(actionRequest,
-					"thesisName" + thesisIndex);
-			System.out.println("=============thesisName==" + thesisName);
-			/*
-			 * int typeId = ParamUtil.getInteger(actionRequest, "phoneTypeId" +
-			 * phonesIndex); System.out.println("=============typeId==" +
-			 * typeId);
-			 */
-
+			String thesisName = ParamUtil.getString(actionRequest, "thesisName" + thesisIndex);
+			if (!thesisName.equals("")) {
+				long thesisId = CounterLocalServiceUtil.increment(Thesis.class.getName());
+				Thesis thesis = ThesisLocalServiceUtil.createThesis(thesisId);
+				thesis = this.updateThesis(thesis, thesisName, user.getUserId());
+				ThesisLocalServiceUtil.addThesis(thesis);
+			}
 		}
 	}
 	
+	/**
+	 * Set attributes to Education object
+	 * 
+	 * @param education Education object
+	 * @param userId long userId
+	 * @param schoolName String schoolName
+	 * @param degreeId long userId
+	 * @param graduateYear String graudateYear
+	 * @param recommender String recommender
+	 * @param introduction String introduction
+	 * @return Education object
+	 */
+	private Education setEducation(Education education, long userId, String schoolName, long degreeId, String graduateYear, 
+			 String recommender, String introduction){
+		education.setUserId(userId);
+		education.setDegreeId(degreeId);
+		education.setSchoolName(schoolName);
+		education.setGraduateYear(graduateYear);
+		education.setIntroduction(introduction);
+		education.setRecommender(recommender);
+		return education;
+	}
+	
+	/**
+	 * Update Honour object
+	 * 
+	 * @param honour Honour object
+	 * @param honoraryName String honoraryName
+	 * @param userId long userId
+	 * @return Honour object
+	 */
+	private Honour updateHonor(Honour honour, String honoraryName, long userId) {
+		honour.setUserId(userId);
+		honour.setHonoraryName(honoraryName);
+		return honour;
+	}
+	
+	/**
+	 * Update Property object
+	 * 
+	 * @param property
+	 * @param propertyName
+	 * @param userId
+	 * @return Property object
+	 */
+	private Property updateProperty(Property property, String propertyName, long userId) {
+		property.setUserId(userId);
+		property.setPropertyName(propertyName);
+		return property;
+	}
+	
+	/**
+	 * Update Thesis object
+	 * 
+	 * @param thesis Thesis object
+	 * @param thesisName String thesisName
+	 * @param userId long userId
+	 * @return Thesis object
+	 */
+	private Thesis updateThesis(Thesis thesis, String thesisName, long userId) {
+		thesis.setUserId(userId);
+		thesis.setThesisName(thesisName);
+		return thesis;
+	}
 	
 }
