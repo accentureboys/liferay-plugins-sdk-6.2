@@ -176,15 +176,17 @@ public class IndividualPortlet extends MVCPortlet {
 	 * @param recommender String recommender
 	 * @param introduction String introduction
 	 * @return Education object
+	 * @throws SystemException 
 	 */
 	private Education setEducation(Education education, long userId, String schoolName, long degreeId, String graduateYear, 
-			 String recommender, String introduction){
+			 String recommender, String introduction) throws SystemException{
 		education.setUserId(userId);
 		education.setDegreeId(degreeId);
 		education.setSchoolName(schoolName);
 		education.setGraduateYear(graduateYear);
 		education.setIntroduction(introduction);
 		education.setRecommender(recommender);
+		EducationLocalServiceUtil.updateEducation(education);
 		return education;
 	}
 	
