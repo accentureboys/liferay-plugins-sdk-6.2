@@ -4,4 +4,7 @@
 <display>
 	<category name="category.sample">
 	</category>
+	<category name="accentureboys">
+		<portlet id="qa portlet"></portlet>
+	</category>
 </display>
